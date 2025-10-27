@@ -1,0 +1,337 @@
+<!-- CARTA Section (Tabs Interactivos) -->
+<section class="bg-stone-50 py-16 sm:py-20" aria-labelledby="menu-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="text-center mb-12">
+      <h2 id="menu-heading" class="text-4xl sm:text-5xl font-bold text-stone-900">nuestra dolce carta</h2>
+      <p class="text-lg text-stone-600 mt-2">sabores clásicos y creaciones by BOCATO.</p>
+    </header>
+
+    <!-- PESTAÑAS (Tabs) -->
+    <div class="max-w-4xl mx-auto">
+      <div role="tablist" class="flex justify-center border-b border-gray-300" aria-label="Categorías del Menú">
+        <button 
+          (click)="setActiveTab('tortas')"
+          role="tab" 
+          [attr.aria-selected]="activeTab === 'tortas'"
+          aria-controls="panel-tortas"
+          [class]="activeTab === 'tortas' ? 'flex-1 py-3 px-1 text-base font-medium text-center border-b-2 transition duration-150 ease-in-out focus:outline-none tab-active' : 'flex-1 py-3 px-1 text-base font-medium text-center border-b-2 transition duration-150 ease-in-out focus:outline-none tab-inactive'">
+          clásicos
+        </button>
+        <button 
+          (click)="setActiveTab('patisserie')"
+          role="tab" 
+          [attr.aria-selected]="activeTab === 'patisserie'"
+          aria-controls="panel-patisserie"
+          [class]="activeTab === 'patisserie' ? 'flex-1 py-3 px-1 text-base font-medium text-center border-b-2 transition duration-150 ease-in-out focus:outline-none tab-active' : 'flex-1 py-3 px-1 text-base font-medium text-center border-b-2 transition duration-150 ease-in-out focus:outline-none tab-inactive'">
+          patisserie by BOCATO
+        </button>
+        <button 
+          (click)="setActiveTab('eventos')"
+          role="tab" 
+          [attr.aria-selected]="activeTab === 'eventos'"
+          aria-controls="panel-eventos"
+          [class]="activeTab === 'eventos' ? 'flex-1 py-3 px-1 text-base font-medium text-center border-b-2 transition duration-150 ease-in-out focus:outline-none tab-active' : 'flex-1 py-3 px-1 text-base font-medium text-center border-b-2 transition duration-150 ease-in-out focus:outline-none tab-inactive'">
+          eventos
+        </button>
+      </div>
+
+      <!-- PANELES DE CONTENIDO (Tab Panels) -->
+      <div class="mt-10">
+        <div 
+          *ngIf="activeTab === 'tortas'"
+          id="panel-tortas" 
+          role="tabpanel" 
+          aria-labelledby="tab-tortas"
+          class="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
+          <h3 class="text-2xl font-semibold text-caramel mb-4">nuestros clásicos inolvidables</h3>
+          <p class="text-stone-700 mb-6">- especialidades de cafetería y pastelería artesanal -</p>
+          
+      <!-- CAFÉS ESPECIALES -->
+      <div class="mb-6">
+        <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h4l-1 3h6l-1-3h4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+            <path d="M8 8h8v2H8zm0 3h8v2H8zm0 3h5v2H8z"/>
+          </svg>
+          Cafés Especiales
+        </h4>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Cappuccino Clásico</span>
+                <span class="font-semibold text-caramel">$1.200</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Latte Art</span>
+                <span class="font-semibold text-caramel">$1.400</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Mocha con Chocolate Belga</span>
+                <span class="font-semibold text-caramel">$1.600</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Café Cold Brew</span>
+                <span class="font-semibold text-caramel">$1.300</span>
+              </div>
+            </div>
+          </div>
+
+      <!-- TORTAS CLÁSICAS -->
+      <div class="mb-6">
+        <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            <circle cx="12" cy="12" r="3" fill="white"/>
+          </svg>
+          Tortas Clásicas
+        </h4>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Cheesecake de Frutos Rojos</span>
+                <span class="font-semibold text-caramel">$3.200</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Red Velvet</span>
+                <span class="font-semibold text-caramel">$2.800</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Lemon Pie</span>
+                <span class="font-semibold text-caramel">$2.600</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Torta de Chocolate Belga</span>
+                <span class="font-semibold text-caramel">$3.000</span>
+              </div>
+            </div>
+          </div>
+
+      <!-- PASTELERÍA FINA -->
+      <div class="mb-6">
+        <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            <path d="M8 8h8v2H8zm0 3h8v2H8zm0 3h5v2H8z"/>
+          </svg>
+          Pastelería Fina
+        </h4>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Croissant de Mantequilla</span>
+                <span class="font-semibold text-caramel">$800</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Pain au Chocolat</span>
+                <span class="font-semibold text-caramel">$950</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Almendrado</span>
+                <span class="font-semibold text-caramel">$1.100</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Canelé de Burdeos</span>
+                <span class="font-semibold text-caramel">$900</span>
+              </div>
+            </div>
+          </div>
+
+      <!-- BEBIDAS FRÍAS -->
+      <div>
+        <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          Bebidas Frías
+        </h4>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Frappé de Vainilla</span>
+                <span class="font-semibold text-caramel">$1.500</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Smoothie de Frutos Rojos</span>
+                <span class="font-semibold text-caramel">$1.400</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Iced Matcha Latte</span>
+                <span class="font-semibold text-caramel">$1.600</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div 
+          *ngIf="activeTab === 'patisserie'"
+          id="panel-patisserie" 
+          role="tabpanel" 
+          aria-labelledby="tab-patisserie"
+          class="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
+          <h3 class="text-2xl font-semibold text-caramel mb-4">patisserie by BOCATO</h3>
+          <p class="text-stone-700">- pequeños bocados que fusionan técnicas modernas & sabores innovadores -</p>
+          <ul class="list-disc list-inside mt-4 text-stone-600 space-y-2">
+            <li>MACARONS >> caja de 6 sabores de temporada (pistacho, rosa, maracuyá).</li>
+            <li>ÉCLAIRS DE CAFÉ >> rellenos de crema de café de origen colombiano.</li>
+            <li>ALMOND PIE >> base de almendra & crema pastelera fresca.</li>
+          </ul>
+        </div>
+        
+        <div 
+          *ngIf="activeTab === 'eventos'"
+          id="panel-eventos" 
+          role="tabpanel" 
+          aria-labelledby="tab-eventos"
+          class="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
+          <h3 class="text-2xl font-semibold text-caramel mb-4">sweet catering</h3>
+          <p class="text-stone-700 mb-6">- combos especializados para eventos únicos -</p>
+          
+          <!-- COMBO BÁSICO -->
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <circle cx="12" cy="12" r="2" fill="white"/>
+              </svg>
+              Combo Básico
+            </h4>
+            <p class="text-sm text-stone-600 mb-3">Perfecto para cumpleaños y reuniones familiares</p>
+            <div class="space-y-2 mb-3">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Torta principal (20-25 porciones)</span>
+                <span class="font-semibold text-caramel">$8.500</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• 12 Cupcakes variados</span>
+                <span class="font-semibold text-caramel">$4.200</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• 20 Alfajores artesanales</span>
+                <span class="font-semibold text-caramel">$3.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Montaje y decoración básica</span>
+                <span class="font-semibold text-caramel">$2.000</span>
+              </div>
+            </div>
+            <div class="border-t border-gray-200 pt-2">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-stone-800">Total Combo Básico</span>
+                <span class="text-xl font-bold text-caramel">$17.700</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMBO PREMIUM -->
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <path d="M12 6l1.5 3L17 10.5l-3 1.5L12 15l-1.5-3L7 10.5l3-1.5L12 6z"/>
+              </svg>
+              Combo Premium
+            </h4>
+            <p class="text-sm text-stone-600 mb-3">Ideal para bodas y eventos corporativos</p>
+            <div class="space-y-2 mb-3">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Torta principal (40-50 porciones)</span>
+                <span class="font-semibold text-caramel">$15.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• 24 Macarons de lujo</span>
+                <span class="font-semibold text-caramel">$7.200</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• 30 Petit Fours variados</span>
+                <span class="font-semibold text-caramel">$6.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Mesa dulce temática completa</span>
+                <span class="font-semibold text-caramel">$8.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Servicio de catering completo</span>
+                <span class="font-semibold text-caramel">$5.000</span>
+              </div>
+            </div>
+            <div class="border-t border-gray-200 pt-2">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-stone-800">Total Combo Premium</span>
+                <span class="text-xl font-bold text-caramel">$41.200</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMBO LUXURY -->
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <path d="M12 4l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l2-4z"/>
+              </svg>
+              Combo Luxury
+            </h4>
+            <p class="text-sm text-stone-600 mb-3">Para eventos exclusivos y celebraciones especiales</p>
+            <div class="space-y-2 mb-3">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Torta principal (60-80 porciones)</span>
+                <span class="font-semibold text-caramel">$22.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• 36 Macarons premium</span>
+                <span class="font-semibold text-caramel">$10.800</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• 50 Petit Fours gourmet</span>
+                <span class="font-semibold text-caramel">$10.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Mesa dulce temática + diseño personalizado</span>
+                <span class="font-semibold text-caramel">$12.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Servicio completo + coordinador de evento</span>
+                <span class="font-semibold text-caramel">$8.000</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">• Opciones sin gluten y veganas</span>
+                <span class="font-semibold text-caramel">$3.000</span>
+              </div>
+            </div>
+            <div class="border-t border-gray-200 pt-2">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-stone-800">Total Combo Luxury</span>
+                <span class="text-xl font-bold text-caramel">$64.800</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVICIOS ADICIONALES -->
+          <div>
+            <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-caramel" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <circle cx="12" cy="12" r="1" fill="white"/>
+                <circle cx="8" cy="8" r="1" fill="white"/>
+                <circle cx="16" cy="8" r="1" fill="white"/>
+                <circle cx="8" cy="16" r="1" fill="white"/>
+                <circle cx="16" cy="16" r="1" fill="white"/>
+              </svg>
+              Servicios Adicionales
+            </h4>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Diseño temático personalizado</span>
+                <span class="font-semibold text-caramel">$2.500</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Entrega y montaje en sitio</span>
+                <span class="font-semibold text-caramel">$1.500</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-stone-700">Coordinador de evento</span>
+                <span class="font-semibold text-caramel">$3.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

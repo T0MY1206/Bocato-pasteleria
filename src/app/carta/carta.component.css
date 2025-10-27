@@ -1,0 +1,17 @@
+/* Estilos específicos de la carta */
+
+/* Asegurar que el borde caramelo se vea correctamente */
+.tab-active {
+  border-bottom-color: #a0522d !important;
+  color: #a0522d !important;
+}
+
+.tab-inactive {
+  border-bottom-color: transparent !important;
+  color: #6b7280 !important;
+}
+
+.tab-inactive:hover {
+  border-bottom-color: #a0522d !important;
+  color: #a0522d !important;
+}
