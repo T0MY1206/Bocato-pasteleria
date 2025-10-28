@@ -1,5 +1,34 @@
 /* Estilos específicos de la carta */
 
+/* Personalización de pestañas Bootstrap */
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6b7280;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #a0522d;
+    color: #a0522d;
+    background-color: transparent;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom-color: #a0522d;
+    color: #a0522d;
+    background-color: transparent;
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link:focus {
+    border-bottom-color: #a0522d;
+    color: #a0522d;
+    box-shadow: none;
+}
+
 /* Asegurar que el borde caramelo se vea correctamente */
 .tab-active {
   border-bottom-color: #a0522d !important;

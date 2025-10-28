@@ -6,73 +6,78 @@
       <p class="text-lg text-stone-600 mt-2">contanos tu idea ó pedido </p>
     </header>
 
-    <form (ngSubmit)="onSubmit()" class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100 space-y-6"
-      aria-live="polite" novalidate>
-      <div class="mb-4">
-        <label for="name" class="block text-sm font-medium text-stone-700 mb-1">nombre & apellido <span
-            class="text-red-500">*</span></label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          [(ngModel)]="formData.name"
-          (input)="onNameInput($event)"
-          required
-          class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-caramel focus:border-caramel focus:outline-none transition duration-150 ease-in-out"
-          [class.border-red-500]="errors.name"
-          [class.border-gray-300]="!errors.name"
-          aria-required="true" 
-          placeholder="Tu nombre">
-        <p *ngIf="errors.name" class="text-sm text-red-600 mt-1" role="alert">{{ errors.name }}</p>
-      </div>
-      
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-stone-700 mb-1">email <span
-            class="text-red-500">*</span></label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          [(ngModel)]="formData.email"
-          required
-          class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-caramel focus:border-caramel focus:outline-none transition duration-150 ease-in-out"
-          [class.border-red-500]="errors.email"
-          [class.border-gray-300]="!errors.email"
-          aria-required="true" 
-          placeholder="nombre@ejemplo.com">
-        <p *ngIf="errors.email" class="text-sm text-red-600 mt-1" role="alert">{{ errors.email }}</p>
-      </div>
-      
-      <div class="mb-4">
-        <label for="message" class="block text-sm font-medium text-stone-700 mb-1">pedido ó consulta <span
-            class="text-red-500">*</span></label>
-        <textarea 
-          id="message" 
-          name="message" 
-          rows="5" 
-          [(ngModel)]="formData.message"
-          required
-          class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-caramel focus:border-caramel focus:outline-none transition duration-150 ease-in-out"
-          [class.border-red-500]="errors.message"
-          [class.border-gray-300]="!errors.message"
-          aria-required="true" 
-          placeholder="Detalla tu pedido, fecha y cantidad."></textarea>
-        <p *ngIf="errors.message" class="text-sm text-red-600 mt-1" role="alert">{{ errors.message }}</p>
-      </div>
-      
-      <button type="submit"
-        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-base font-medium text-white bg-caramel hover:bg-caramel-dark transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-caramel focus:ring-opacity-50">
-        enviar
-      </button>
-      
-      <!-- Área de mensaje de éxito/error -->
-      <div *ngIf="showMessage" class="text-center p-3 rounded-xl mt-4" 
-        [class.bg-green-100]="formMessage.includes('✅')"
-        [class.text-green-700]="formMessage.includes('✅')"
-        [class.bg-red-100]="formMessage.includes('❌')"
-        [class.text-red-700]="formMessage.includes('❌')"
-        role="status" aria-live="assertive">
-        {{ formMessage }}
+    <form (ngSubmit)="onSubmit()" class="card shadow-lg border-0" aria-live="polite" novalidate>
+      <div class="card-body p-4 p-md-5">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-medium text-stone-700">
+            nombre & apellido <span class="text-danger">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            [(ngModel)]="formData.name"
+            (input)="onNameInput($event)"
+            required
+            class="form-control form-control-lg"
+            [class.is-invalid]="errors.name"
+            aria-required="true" 
+            placeholder="Tu nombre">
+          <div *ngIf="errors.name" class="invalid-feedback" role="alert">
+            {{ errors.name }}
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="email" class="form-label fw-medium text-stone-700">
+            email <span class="text-danger">*</span>
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            [(ngModel)]="formData.email"
+            required
+            class="form-control form-control-lg"
+            [class.is-invalid]="errors.email"
+            aria-required="true" 
+            placeholder="nombre@ejemplo.com">
+          <div *ngIf="errors.email" class="invalid-feedback" role="alert">
+            {{ errors.email }}
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <label for="message" class="form-label fw-medium text-stone-700">
+            pedido ó consulta <span class="text-danger">*</span>
+          </label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="5" 
+            [(ngModel)]="formData.message"
+            required
+            class="form-control form-control-lg"
+            [class.is-invalid]="errors.message"
+            aria-required="true" 
+            placeholder="Detalla tu pedido, fecha y cantidad."></textarea>
+          <div *ngIf="errors.message" class="invalid-feedback" role="alert">
+            {{ errors.message }}
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-caramel btn-lg w-100 py-3">
+          <i class="bi bi-send me-2"></i>enviar
+        </button>
+        
+        <!-- Área de mensaje de éxito/error -->
+        <div *ngIf="showMessage" class="alert mt-4 mb-0" 
+          [class.alert-success]="formMessage.includes('✅')"
+          [class.alert-danger]="formMessage.includes('❌')"
+          role="status" aria-live="assertive">
+          <i class="bi" [class.bi-check-circle-fill]="formMessage.includes('✅')" [class.bi-exclamation-triangle-fill]="formMessage.includes('❌')" me-2></i>
+          {{ formMessage }}
+        </div>
       </div>
     </form>
   </div>

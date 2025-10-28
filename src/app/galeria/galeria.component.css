@@ -1,0 +1,55 @@
+/* Estilos para el efecto de expansión de la galería */
+.gallery-card {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.gallery-image {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+}
+
+.gallery-card:hover .gallery-image {
+  transform: scale(1.1);
+}
+
+.gallery-content {
+  transition: all 0.3s ease-in-out;
+}
+
+.gallery-card:hover .gallery-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+/* Efecto de brillo sutil en hover */
+.gallery-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gallery-card:hover::before {
+  opacity: 1;
+}
+
+/* Asegurar que el contenido esté por encima del overlay */
+.gallery-content {
+  position: relative;
+  z-index: 2;
+}
