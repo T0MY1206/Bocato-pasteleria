@@ -107,8 +107,8 @@
     <router-outlet></router-outlet>
   </main>
 
-  <!-- 3. FOOTER -->
-  <footer class="bg-stone-900 text-white mt-16">
+  <!-- 3. FOOTER (solo en páginas que no sean home) -->
+  <footer *ngIf="!isHomePage()" class="bg-stone-900 text-white mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div class="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
         <!-- Información de Contacto (ASIDE) -->

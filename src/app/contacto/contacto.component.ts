@@ -1,18 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OrderCalculatorComponent } from '../compartido/order-calculator/order-calculator.component';
+import { AnimationsService } from '../services/animations.service';
+import { CalculatedOrder } from '../services/order-calculator.service';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, OrderCalculatorComponent],
   templateUrl: './contacto.component.html'
 })
-export class ContactoComponent {
+export class ContactoComponent implements OnInit, AfterViewInit {
   formData = {
     name: '',
     email: '',
-    message: ''
+    phone: '',
+    message: '',
+    eventDate: '',
+    guestCount: 0,
+    eventType: '',
+    budget: 0,
+    preferences: {
+      sinGluten: false,
+      vegano: false,
+      sugarFree: false
+    }
   };
 
   errors = {
@@ -23,6 +36,44 @@ export class ContactoComponent {
 
   formMessage = '';
   showMessage = false;
+  minDate = '';
+
+  // Datos de la calculadora
+  calculatedOrder: CalculatedOrder | null = null;
+
+  constructor(private animationsService: AnimationsService) {}
+
+  ngOnInit(): void {
+    // Establecer fecha mínima (hoy)
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
+  }
+
+  ngAfterViewInit(): void {
+    this.initializeAnimations();
+  }
+
+  private initializeAnimations(): void {
+    // Configurar animaciones de entrada
+    this.animationsService.observeElements('.animate-fade-in-up', (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target as HTMLElement;
+          const delay = parseInt(element.getAttribute('data-animation-delay') || '0');
+          
+          setTimeout(() => {
+            element.classList.add('animate-in');
+          }, delay);
+        }
+      });
+    });
+
+    // Aplicar efectos hover a las cards
+    const cards = document.querySelectorAll('.hover-lift');
+    cards.forEach(card => {
+      this.animationsService.addCardHoverEffect(card as HTMLElement);
+    });
+  }
 
   validateForm(): boolean {
     let isValid = true;
@@ -79,17 +130,105 @@ export class ContactoComponent {
 
   onSubmit() {
     if (this.validateForm()) {
-      // Simulación de envío exitoso
-      console.log('Formulario de Pedido Enviado:', this.formData);
+      // Crear mensaje completo con información de la calculadora
+      let completeMessage = this.formData.message;
       
-      this.formMessage = '✅ ¡Gracias! Tu pedido ha sido enviado. Te contactaremos pronto.';
+      if (this.calculatedOrder) {
+        completeMessage += `\n\n--- INFORMACIÓN DE LA CALCULADORA ---\n`;
+        completeMessage += `Paquete recomendado: ${this.calculatedOrder.recommendedPackage}\n`;
+        completeMessage += `Precio total: $${this.calculatedOrder.totalPrice}\n`;
+        completeMessage += `Cantidad de invitados: ${this.calculatedOrder.servingSize}\n`;
+        completeMessage += `Tiempo de preparación: ${this.calculatedOrder.preparationTime} horas\n`;
+        
+        if (this.calculatedOrder.suggestions.length > 0) {
+          completeMessage += `\nSugerencias:\n`;
+          this.calculatedOrder.suggestions.forEach(suggestion => {
+            completeMessage += `- ${suggestion}\n`;
+          });
+        }
+      }
+
+      // Información adicional del formulario
+      if (this.formData.eventDate) {
+        completeMessage += `\nFecha del evento: ${this.formData.eventDate}\n`;
+      }
+      if (this.formData.guestCount > 0) {
+        completeMessage += `Cantidad de invitados: ${this.formData.guestCount}\n`;
+      }
+      if (this.formData.eventType) {
+        completeMessage += `Tipo de evento: ${this.formData.eventType}\n`;
+      }
+      if (this.formData.budget > 0) {
+        completeMessage += `Presupuesto: $${this.formData.budget}\n`;
+      }
+
+      // Preferencias especiales
+      const preferences = [];
+      if (this.formData.preferences.sinGluten) preferences.push('Sin Gluten');
+      if (this.formData.preferences.vegano) preferences.push('Opciones Veganas');
+      if (this.formData.preferences.sugarFree) preferences.push('Sin Azúcar');
+      
+      if (preferences.length > 0) {
+        completeMessage += `Preferencias especiales: ${preferences.join(', ')}\n`;
+      }
+
+      // Simulación de envío exitoso
+      console.log('Formulario de Pedido Enviado:', {
+        ...this.formData,
+        message: completeMessage
+      });
+      
+      this.formMessage = '✅ ¡Gracias! Tu pedido ha sido enviado. Te contactaremos pronto para confirmar los detalles.';
       this.showMessage = true;
       
       // Limpiar el formulario
-      this.formData = { name: '', email: '', message: '' };
+      this.resetForm();
     } else {
       this.formMessage = '❌ Por favor, revisa y corrige los campos marcados en rojo para enviar tu pedido.';
       this.showMessage = true;
+    }
+  }
+
+  private resetForm(): void {
+    this.formData = {
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+      eventDate: '',
+      guestCount: 0,
+      eventType: '',
+      budget: 0,
+      preferences: {
+        sinGluten: false,
+        vegano: false,
+        sugarFree: false
+      }
+    };
+    this.calculatedOrder = null;
+  }
+
+  // Métodos para manejar eventos de la calculadora
+  onOrderCalculated(order: CalculatedOrder): void {
+    this.calculatedOrder = order;
+    console.log('Pedido calculado:', order);
+  }
+
+  onCustomizeRequested(): void {
+    console.log('Personalización solicitada');
+    // Aquí podrías abrir un modal de personalización
+  }
+
+  onProceedToOrder(order: CalculatedOrder): void {
+    console.log('Proceder al pedido:', order);
+    // Aquí podrías redirigir a un proceso de checkout o completar el formulario automáticamente
+    this.formData.guestCount = order.servingSize;
+    this.formData.budget = order.totalPrice;
+    
+    // Scroll al formulario
+    const formElement = document.querySelector('.card');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }

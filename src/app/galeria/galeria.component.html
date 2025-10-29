@@ -1,65 +1,207 @@
-<!-- GALERÍA Section (Grid Responsivo) -->
+<!-- GALERÍA Section con Búsqueda Avanzada y Efectos -->
 <section class="py-16 sm:py-20" aria-labelledby="gallery-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <header class="text-center mb-12">
-      <h2 id="gallery-heading" class="text-4xl sm:text-5xl font-bold text-stone-900">nuestras últimas creaciones
+      <h2 id="gallery-heading" class="text-4xl sm:text-5xl font-bold text-stone-900 animate-fade-in-up">
+        nuestras últimas creaciones
       </h2>
-      <p class="text-lg text-stone-600 mt-2">- la belleza de la pastelería en cada detalle -</p>
+      <p class="text-lg text-stone-600 mt-2 animate-fade-in-up" data-animation-delay="200">
+        - la belleza de la pastelería en cada detalle -
+      </p>
     </header>
 
-    <div class="row g-4">
-      <!-- Artículo de Postre 1 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <article class="card gallery-card h-100 border-0 shadow">
-          <div class="card-img-top gallery-image-container" style="height: 240px; overflow: hidden;">
-            <img src="assets/mangoymaracuya.jpg" class="gallery-image w-100 h-100" style="object-fit: cover;" alt="Tarta de Mango y Maracuyá">
-          </div>
-          <div class="card-body gallery-content d-flex flex-column">
-            <h5 class="card-title text-stone-900 mb-2">tarta de Mango & Maracuyá</h5>
-            <p class="card-text text-stone-600 small mb-3 flex-grow-1">la frescura tropical en un postre aireado.</p>
-            <small class="text-stone-400 fw-medium mb-3">Categoría: Tartas Frutales</small>
-            <button type="button" class="btn btn-link text-caramel p-0 text-decoration-none fw-medium" 
-                    (click)="openRecipeModal('tarta de Mango & Maracuyá', getMangoMaracuyaRecipe())">
-              Ver Receta <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
-        </article>
-      </div>
+    <!-- Componente de búsqueda avanzada -->
+    <div class="mb-8 animate-fade-in-up" data-animation-delay="400">
+        <app-search-advanced 
+          (searchResultsEvent)="onSearchResults($event)"
+          (productSelected)="onProductSelected($event)">
+        </app-search-advanced>
+    </div>
 
-      <!-- Artículo de Postre 2 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <article class="card gallery-card h-100 border-0 shadow">
-          <div class="card-img-top gallery-image-container" style="height: 240px; overflow: hidden;">
-            <img src="assets/chococro.jpg" class="gallery-image w-100 h-100" style="object-fit: cover;" alt="Croissant de Doble Chocolate">
-          </div>
-          <div class="card-body gallery-content d-flex flex-column">
-            <h5 class="card-title text-stone-900 mb-2">croissant de Doble Chocolate</h5>
-            <p class="card-text text-stone-600 small mb-3 flex-grow-1">hojaldre perfecto con relleno de ganache de cacao 70%.</p>
-            <small class="text-stone-400 fw-medium mb-3">Categoría: Bollería</small>
-            <button type="button" class="btn btn-link text-caramel p-0 text-decoration-none fw-medium" 
-                    (click)="openRecipeModal('croissant de Doble Chocolate', getCroissantRecipe())">
-              Ver Receta <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
-        </article>
+    <!-- Filtros rápidos -->
+    <div class="quick-filters mb-8 animate-fade-in-up" data-animation-delay="600">
+      <div class="flex flex-wrap justify-center gap-4">
+        <button 
+          *ngFor="let filter of quickFilters"
+          (click)="applyQuickFilter(filter)"
+          [class]="activeFilter === filter.id ? 'bg-caramel text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+          class="px-4 py-2 rounded-full border border-gray-200 transition-all duration-300 hover:shadow-md">
+          <i [class]="filter.icon" class="mr-2"></i>
+          {{ filter.name }}
+        </button>
       </div>
+    </div>
 
-      <!-- Artículo de Postre 3 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <article class="card gallery-card h-100 border-0 shadow">
-          <div class="card-img-top gallery-image-container" style="height: 240px; overflow: hidden;">
-            <img src="assets/mesadulce.jpg" class="gallery-image w-100 h-100" style="object-fit: cover;" alt="Torta de Boda">
-          </div>
-          <div class="card-body gallery-content d-flex flex-column">
-            <h5 class="card-title text-stone-900 mb-2">bride</h5>
-            <p class="card-text text-stone-600 small mb-3 flex-grow-1">diseño personalizado y elegante para una boda en Buenos Aires.</p>
-            <small class="text-stone-400 fw-medium mb-3">Categoría: Catering</small>
-            <button type="button" class="btn btn-link text-caramel p-0 text-decoration-none fw-medium" 
-                    (click)="openRecipeModal('Paquete Catering para Bodas', getBrideRecipe())">
-              Ver Paquete <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
-        </article>
+    <!-- Grid de productos con efectos avanzados -->
+    <div class="products-grid">
+      <div class="row g-4">
+        <!-- Artículo de Postre 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card gallery-card h-100 border-0 shadow hover-lift">
+            <div class="card-img-top gallery-image-container position-relative" style="height: 240px; overflow: hidden;">
+              <img 
+                src="assets/mangoymaracuya.jpg" 
+                class="gallery-image w-100 h-100" 
+                style="object-fit: cover;" 
+                alt="Tarta de Mango y Maracuyá"
+                (click)="openImageZoom('assets/mangoymaracuya.jpg', 'Tarta de Mango y Maracuyá')">
+              
+              <!-- Overlay con información -->
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  <button 
+                    (click)="openImageZoom('assets/mangoymaracuya.jpg', 'Tarta de Mango y Maracuyá')"
+                    class="btn btn-light btn-sm mb-2 hover-glow">
+                    <i class="bi bi-zoom-in"></i>
+                  </button>
+                  <button 
+                    (click)="toggleFavorite('mango-maracuya')"
+                    class="btn btn-light btn-sm hover-glow">
+                    <i [class]="isFavorite('mango-maracuya') ? 'bi bi-heart-fill text-red-500' : 'bi bi-heart'"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Badge de categoría -->
+              <div class="category-badge">
+                <span class="badge bg-caramel">Tartas Frutales</span>
+              </div>
+            </div>
+            
+            <div class="card-body gallery-content d-flex flex-column">
+              <h5 class="card-title text-stone-900 mb-2">tarta de Mango & Maracuyá</h5>
+              <p class="card-text text-stone-600 small mb-3 flex-grow-1">la frescura tropical en un postre aireado.</p>
+              
+              <!-- Tags -->
+              <div class="tags mb-3">
+                <span class="tag">frutos tropicales</span>
+                <span class="tag">sin horno</span>
+                <span class="tag">vegetariano</span>
+              </div>
+              
+              <!-- Precio y acción -->
+              <div class="d-flex justify-between align-items-center">
+                <span class="price text-caramel font-bold">$3.200</span>
+                <button type="button" class="btn btn-link text-caramel p-0 text-decoration-none fw-medium" 
+                        (click)="openRecipeModal('tarta de Mango & Maracuyá', getMangoMaracuyaRecipe())">
+                  Ver Receta <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Artículo de Postre 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card gallery-card h-100 border-0 shadow hover-lift">
+            <div class="card-img-top gallery-image-container position-relative" style="height: 240px; overflow: hidden;">
+              <img 
+                src="assets/chococro.jpg" 
+                class="gallery-image w-100 h-100" 
+                style="object-fit: cover;" 
+                alt="Croissant de Doble Chocolate"
+                (click)="openImageZoom('assets/chococro.jpg', 'Croissant de Doble Chocolate')">
+              
+              <!-- Overlay con información -->
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  <button 
+                    (click)="openImageZoom('assets/chococro.jpg', 'Croissant de Doble Chocolate')"
+                    class="btn btn-light btn-sm mb-2 hover-glow">
+                    <i class="bi bi-zoom-in"></i>
+                  </button>
+                  <button 
+                    (click)="toggleFavorite('chococro')"
+                    class="btn btn-light btn-sm hover-glow">
+                    <i [class]="isFavorite('chococro') ? 'bi bi-heart-fill text-red-500' : 'bi bi-heart'"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Badge de categoría -->
+              <div class="category-badge">
+                <span class="badge bg-caramel">Bollería</span>
+              </div>
+            </div>
+            
+            <div class="card-body gallery-content d-flex flex-column">
+              <h5 class="card-title text-stone-900 mb-2">croissant de Doble Chocolate</h5>
+              <p class="card-text text-stone-600 small mb-3 flex-grow-1">hojaldre perfecto con relleno de ganache de cacao 70%.</p>
+              
+              <!-- Tags -->
+              <div class="tags mb-3">
+                <span class="tag">chocolate</span>
+                <span class="tag">hojaldre</span>
+                <span class="tag">artesanal</span>
+              </div>
+              
+              <!-- Precio y acción -->
+              <div class="d-flex justify-between align-items-center">
+                <span class="price text-caramel font-bold">$950</span>
+                <button type="button" class="btn btn-link text-caramel p-0 text-decoration-none fw-medium" 
+                        (click)="openRecipeModal('croissant de Doble Chocolate', getCroissantRecipe())">
+                  Ver Receta <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Artículo de Postre 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card gallery-card h-100 border-0 shadow hover-lift">
+            <div class="card-img-top gallery-image-container position-relative" style="height: 240px; overflow: hidden;">
+              <img 
+                src="assets/mesadulce.jpg" 
+                class="gallery-image w-100 h-100" 
+                style="object-fit: cover;" 
+                alt="Torta de Boda"
+                (click)="openImageZoom('assets/mesadulce.jpg', 'Torta de Boda')">
+              
+              <!-- Overlay con información -->
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  <button 
+                    (click)="openImageZoom('assets/mesadulce.jpg', 'Torta de Boda')"
+                    class="btn btn-light btn-sm mb-2 hover-glow">
+                    <i class="bi bi-zoom-in"></i>
+                  </button>
+                  <button 
+                    (click)="toggleFavorite('mesadulce')"
+                    class="btn btn-light btn-sm hover-glow">
+                    <i [class]="isFavorite('mesadulce') ? 'bi bi-heart-fill text-red-500' : 'bi bi-heart'"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Badge de categoría -->
+              <div class="category-badge">
+                <span class="badge bg-caramel">Catering</span>
+              </div>
+            </div>
+            
+            <div class="card-body gallery-content d-flex flex-column">
+              <h5 class="card-title text-stone-900 mb-2">bride</h5>
+              <p class="card-text text-stone-600 small mb-3 flex-grow-1">diseño personalizado y elegante para una boda en Buenos Aires.</p>
+              
+              <!-- Tags -->
+              <div class="tags mb-3">
+                <span class="tag">boda</span>
+                <span class="tag">personalizado</span>
+                <span class="tag">elegante</span>
+              </div>
+              
+              <!-- Precio y acción -->
+              <div class="d-flex justify-between align-items-center">
+                <span class="price text-caramel font-bold">$45.000</span>
+                <button type="button" class="btn btn-link text-caramel p-0 text-decoration-none fw-medium" 
+                        (click)="openRecipeModal('Paquete Catering para Bodas', getBrideRecipe())">
+                  Ver Paquete <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </div>
@@ -71,4 +213,18 @@
     [content]="modalContent"
     (close)="closeModal()">
   </app-modal-recetas>
+
+  <!-- Modal de Zoom de Imagen -->
+  <div *ngIf="isImageZoomOpen" class="image-zoom-modal" (click)="closeImageZoom()">
+    <div class="zoom-content" (click)="$event.stopPropagation()">
+      <button class="close-zoom-btn" (click)="closeImageZoom()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <img [src]="zoomedImageUrl" [alt]="zoomedImageAlt" class="zoomed-image">
+      <div class="zoom-info">
+        <h3>{{ zoomedImageAlt }}</h3>
+        <p>Haz clic fuera de la imagen para cerrar</p>
+      </div>
+    </div>
+  </div>
 </section>

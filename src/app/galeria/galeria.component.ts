@@ -1,18 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ModalRecetasComponent } from '../compartido/modal-recetas/modal-recetas.component';
+import { SearchAdvancedComponent } from '../compartido/search-advanced/search-advanced.component';
+import { AnimationsService } from '../services/animations.service';
+import { SearchResult } from '../services/search.service';
 
 @Component({
   selector: 'app-galeria',
   standalone: true,
-  imports: [ModalRecetasComponent],
+  imports: [CommonModule, ModalRecetasComponent, SearchAdvancedComponent],
   templateUrl: './galeria.component.html',
   styleUrls: ['./galeria.component.css']
 })
-export class GaleriaComponent {
+export class GaleriaComponent implements OnInit, AfterViewInit {
+  // Modal de recetas
   isModalOpen = false;
   modalTitle = '';
   modalContent = '';
 
+  // Modal de zoom de imagen
+  isImageZoomOpen = false;
+  zoomedImageUrl = '';
+  zoomedImageAlt = '';
+
+  // Filtros y búsqueda
+  quickFilters = [
+    { id: 'all', name: 'Todos', icon: 'bi bi-grid-3x3' },
+    { id: 'tortas', name: 'Tortas', icon: 'bi bi-cake' },
+    { id: 'bolleria', name: 'Bollería', icon: 'bi bi-basket' },
+    { id: 'catering', name: 'Catering', icon: 'bi bi-calendar-event' },
+    { id: 'signature', name: 'Signature', icon: 'bi bi-star-fill' }
+  ];
+  activeFilter = 'all';
+
+  // Wishlist/Favoritos
+  favorites: string[] = [];
+
+  // Resultados de búsqueda
+  searchResults: SearchResult | null = null;
+
+  constructor(private animationsService: AnimationsService) {}
+
+  ngOnInit(): void {
+    this.loadFavorites();
+  }
+
+  ngAfterViewInit(): void {
+    this.initializeAnimations();
+  }
+
+  private initializeAnimations(): void {
+    // Configurar animaciones de entrada
+    this.animationsService.observeElements('.animate-fade-in-up', (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target as HTMLElement;
+          const delay = parseInt(element.getAttribute('data-animation-delay') || '0');
+          
+          setTimeout(() => {
+            element.classList.add('animate-in');
+          }, delay);
+        }
+      });
+    });
+
+    // Aplicar efectos hover a las cards
+    const cards = document.querySelectorAll('.gallery-card');
+    cards.forEach(card => {
+      this.animationsService.addCardHoverEffect(card as HTMLElement);
+    });
+  }
+
+  // Métodos del modal de recetas
   openRecipeModal(title: string, content: string) {
     this.modalTitle = title;
     this.modalContent = content;
@@ -23,6 +82,70 @@ export class GaleriaComponent {
     this.isModalOpen = false;
   }
 
+  // Métodos del modal de zoom
+  openImageZoom(imageUrl: string, imageAlt: string) {
+    this.zoomedImageUrl = imageUrl;
+    this.zoomedImageAlt = imageAlt;
+    this.isImageZoomOpen = true;
+    
+    // Prevenir scroll del body
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeImageZoom() {
+    this.isImageZoomOpen = false;
+    this.zoomedImageUrl = '';
+    this.zoomedImageAlt = '';
+    
+    // Restaurar scroll del body
+    document.body.style.overflow = '';
+  }
+
+  // Métodos de filtros
+  applyQuickFilter(filter: any) {
+    this.activeFilter = filter.id;
+    // Aquí implementarías la lógica de filtrado
+    console.log('Aplicando filtro:', filter.name);
+  }
+
+  // Métodos de favoritos
+  toggleFavorite(productId: string) {
+    const index = this.favorites.indexOf(productId);
+    if (index > -1) {
+      this.favorites.splice(index, 1);
+    } else {
+      this.favorites.push(productId);
+    }
+    this.saveFavorites();
+  }
+
+  isFavorite(productId: string): boolean {
+    return this.favorites.includes(productId);
+  }
+
+  private loadFavorites(): void {
+    const saved = localStorage.getItem('bocato-favorites');
+    if (saved) {
+      this.favorites = JSON.parse(saved);
+    }
+  }
+
+  private saveFavorites(): void {
+    localStorage.setItem('bocato-favorites', JSON.stringify(this.favorites));
+  }
+
+  // Métodos de búsqueda
+  onSearchResults(results: SearchResult) {
+    this.searchResults = results;
+    console.log('Resultados de búsqueda:', results);
+  }
+
+  onProductSelected(product: any) {
+    console.log('Producto seleccionado:', product);
+    // Aquí podrías abrir un modal con detalles del producto
+  }
+
+  // Métodos de recetas (mantener los existentes)
   getMangoMaracuyaRecipe(): string {
     return `Ingredientes
 

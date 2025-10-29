@@ -1,22 +1,103 @@
-<!-- HOME/HERO Section -->
-<section class="bg-white py-16 sm:py-32" aria-labelledby="hero-heading">
+<!-- HOME/HERO Section con Parallax y Animaciones -->
+<section class="hero-section relative overflow-hidden min-h-screen flex items-center" aria-labelledby="hero-heading">
+  <!-- Fondo con parallax -->
+  <div class="parallax-bg absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50"></div>
+  
+  <!-- Elementos decorativos con parallax -->
+  <div class="parallax-element-1 absolute top-20 left-10 w-32 h-32 bg-caramel opacity-10 rounded-full blur-xl"></div>
+  <div class="parallax-element-2 absolute top-40 right-20 w-24 h-24 bg-orange-300 opacity-15 rounded-full blur-lg"></div>
+  <div class="parallax-element-3 absolute bottom-20 left-1/4 w-40 h-40 bg-yellow-200 opacity-10 rounded-full blur-2xl"></div>
+  
+  <!-- Contenido principal -->
+  <div class="relative z-10 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article class="text-center">
+        <!-- Logo animado -->
+        <div class="hero-logo mb-6">
+          <h1 id="hero-heading"
+            class="text-6xl sm:text-7xl lg:text-8xl font-extrabold text-caramel leading-tight mb-4 animate-fade-in-up"
+            data-animation-delay="0">
+            BOCATO
+          </h1>
+          <div class="logo-decoration w-24 h-1 bg-gradient-to-r from-transparent via-caramel to-transparent mx-auto animate-scale-in"
+               data-animation-delay="200"></div>
+        </div>
+        
+        <!-- Subtítulo con efecto typing -->
+        <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-stone-900 leading-tight mb-6 animate-fade-in-up"
+            data-animation-delay="400">
+          <span class="typing-text">la dulce tentación</span>
+        </h2>
+        
+        <!-- Descripción con glassmorphism -->
+        <div class="glassmorphism-card max-w-4xl mx-auto mb-8 p-6 animate-fade-in-up"
+             data-animation-delay="600">
+          <p class="text-xl text-stone-700 font-medium">
+            - cada bocado, una obra de arte -
+          </p>
+        </div>
+        
+        <!-- Botón CTA con micro-interacciones -->
+        <div class="animate-fade-in-up" data-animation-delay="800">
+          <a routerLink="/contacto"
+            class="cta-button inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-full shadow-xl text-white bg-caramel hover:bg-caramel-dark transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-caramel focus:ring-opacity-50 transform hover:scale-105 hover:-translate-y-1"
+            role="button">
+            <span class="mr-2">reservas & pedidos</span>
+            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+  
+  <!-- Partículas flotantes -->
+  <div class="floating-particles">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+  </div>
+</section>
+
+<!-- Sección Simple de Navegación -->
+<section class="bg-stone-50 py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <article class="text-center">
-      <h1 id="hero-heading"
-        class="text-6xl sm:text-7xl lg:text-8xl font-extrabold text-caramel leading-tight mb-8">
-        BOCATO
-      </h1>
-      <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-stone-900 leading-tight mb-4">
-        la dulce tentación
+    <div class="text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
+        descubre nuestros sabores
       </h2>
-      <p class="text-xl text-stone-600 max-w-4xl mx-auto mb-8">
-        - cada bocado, una obra de arte -
+      <p class="text-lg text-stone-600 mb-8">
+        - cada bocado cuenta una historia -
       </p>
-      <a routerLink="/contacto"
-        class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-full shadow-xl text-white bg-caramel hover:bg-caramel-dark transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-caramel focus:ring-opacity-50"
-        role="button">
-        reservas & pedidos
-      </a>
-    </article>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <a routerLink="/carta" class="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+          <div class="text-caramel text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <i class="bi bi-book"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-stone-800 mb-2">nuestra carta</h3>
+          <p class="text-stone-600 text-sm">Explora nuestros clásicos y creaciones signature</p>
+        </a>
+        
+        <a routerLink="/galeria" class="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+          <div class="text-caramel text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <i class="bi bi-images"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-stone-800 mb-2">galería</h3>
+          <p class="text-stone-600 text-sm">Descubre nuestras últimas creaciones</p>
+        </a>
+        
+        <a routerLink="/contacto" class="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+          <div class="text-caramel text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <i class="bi bi-calendar-event"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-stone-800 mb-2">reservas</h3>
+          <p class="text-stone-600 text-sm">Haz tu pedido o reserva tu evento</p>
+        </a>
+      </div>
+    </div>
   </div>
 </section>

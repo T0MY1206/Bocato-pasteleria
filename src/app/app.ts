@@ -31,4 +31,8 @@ export class App {
   isActiveRoute(route: string): boolean {
     return this.currentRoute === route;
   }
+
+  isHomePage(): boolean {
+    return this.currentRoute === '/home' || this.currentRoute === '/';
+  }
 }
