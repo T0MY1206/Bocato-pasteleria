@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalRecetasComponent } from '../compartido/modal-recetas/modal-recetas.component';
 import { SearchAdvancedComponent } from '../compartido/search-advanced/search-advanced.component';
@@ -8,11 +8,11 @@ import { SearchResult } from '../services/search.service';
 @Component({
   selector: 'app-galeria',
   standalone: true,
-  imports: [CommonModule, ModalRecetasComponent, SearchAdvancedComponent],
+  imports: [CommonModule, ModalRecetasComponent],
   templateUrl: './galeria.component.html',
   styleUrls: ['./galeria.component.css']
 })
-export class GaleriaComponent implements OnInit, AfterViewInit {
+export class GaleriaComponent implements OnInit, AfterViewInit, OnDestroy {
   // Modal de recetas
   isModalOpen = false;
   modalTitle = '';
@@ -39,14 +39,47 @@ export class GaleriaComponent implements OnInit, AfterViewInit {
   // Resultados de búsqueda
   searchResults: SearchResult | null = null;
 
+  // Carrusel de productos
+  productos = [
+    { id: 1, nombre: 'tarta de Mango & Maracuyá', imagen: 'assets/mangoymaracuya.jpg' },
+    { id: 2, nombre: 'croissant de Doble Chocolate', imagen: 'assets/chococro.jpg' },
+    { id: 3, nombre: 'bride', imagen: 'assets/mesadulce.jpg' }
+  ];
+
+  currentIndex = 0;
+  private carouselInterval: any;
+
   constructor(private animationsService: AnimationsService) {}
 
   ngOnInit(): void {
     this.loadFavorites();
+    this.startCarousel();
   }
 
   ngAfterViewInit(): void {
     this.initializeAnimations();
+  }
+
+  ngOnDestroy(): void {
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
+  }
+
+  startCarousel(): void {
+    // Cambiar de imagen cada 3 segundos
+    this.carouselInterval = setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.productos.length;
+    }, 3000);
+  }
+
+  goToSlide(index: number): void {
+    this.currentIndex = index;
+    // Reiniciar el intervalo cuando se cambia manualmente
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
+    this.startCarousel();
   }
 
   private initializeAnimations(): void {

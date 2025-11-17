@@ -1,14 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OrderCalculatorComponent } from '../compartido/order-calculator/order-calculator.component';
 import { AnimationsService } from '../services/animations.service';
-import { CalculatedOrder } from '../services/order-calculator.service';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [FormsModule, CommonModule, OrderCalculatorComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './contacto.component.html'
 })
 export class ContactoComponent implements OnInit, AfterViewInit {
@@ -37,9 +35,6 @@ export class ContactoComponent implements OnInit, AfterViewInit {
   formMessage = '';
   showMessage = false;
   minDate = '';
-
-  // Datos de la calculadora
-  calculatedOrder: CalculatedOrder | null = null;
 
   constructor(private animationsService: AnimationsService) {}
 
@@ -130,23 +125,8 @@ export class ContactoComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     if (this.validateForm()) {
-      // Crear mensaje completo con información de la calculadora
+      // Crear mensaje completo
       let completeMessage = this.formData.message;
-      
-      if (this.calculatedOrder) {
-        completeMessage += `\n\n--- INFORMACIÓN DE LA CALCULADORA ---\n`;
-        completeMessage += `Paquete recomendado: ${this.calculatedOrder.recommendedPackage}\n`;
-        completeMessage += `Precio total: $${this.calculatedOrder.totalPrice}\n`;
-        completeMessage += `Cantidad de invitados: ${this.calculatedOrder.servingSize}\n`;
-        completeMessage += `Tiempo de preparación: ${this.calculatedOrder.preparationTime} horas\n`;
-        
-        if (this.calculatedOrder.suggestions.length > 0) {
-          completeMessage += `\nSugerencias:\n`;
-          this.calculatedOrder.suggestions.forEach(suggestion => {
-            completeMessage += `- ${suggestion}\n`;
-          });
-        }
-      }
 
       // Información adicional del formulario
       if (this.formData.eventDate) {
@@ -173,18 +153,18 @@ export class ContactoComponent implements OnInit, AfterViewInit {
       }
 
       // Simulación de envío exitoso
-      console.log('Formulario de Pedido Enviado:', {
+      console.log('Formulario de Reserva Enviado:', {
         ...this.formData,
         message: completeMessage
       });
       
-      this.formMessage = '✅ ¡Gracias! Tu pedido ha sido enviado. Te contactaremos pronto para confirmar los detalles.';
+      this.formMessage = '✅ ¡Gracias! Tu reserva ha sido enviada. Te contactaremos pronto para confirmar los detalles.';
       this.showMessage = true;
       
       // Limpiar el formulario
       this.resetForm();
     } else {
-      this.formMessage = '❌ Por favor, revisa y corrige los campos marcados en rojo para enviar tu pedido.';
+      this.formMessage = '❌ Por favor, revisa y corrige los campos marcados en rojo para enviar tu reserva.';
       this.showMessage = true;
     }
   }
@@ -205,30 +185,5 @@ export class ContactoComponent implements OnInit, AfterViewInit {
         sugarFree: false
       }
     };
-    this.calculatedOrder = null;
-  }
-
-  // Métodos para manejar eventos de la calculadora
-  onOrderCalculated(order: CalculatedOrder): void {
-    this.calculatedOrder = order;
-    console.log('Pedido calculado:', order);
-  }
-
-  onCustomizeRequested(): void {
-    console.log('Personalización solicitada');
-    // Aquí podrías abrir un modal de personalización
-  }
-
-  onProceedToOrder(order: CalculatedOrder): void {
-    console.log('Proceder al pedido:', order);
-    // Aquí podrías redirigir a un proceso de checkout o completar el formulario automáticamente
-    this.formData.guestCount = order.servingSize;
-    this.formData.budget = order.totalPrice;
-    
-    // Scroll al formulario
-    const formElement = document.querySelector('.card');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
-    }
   }
 }

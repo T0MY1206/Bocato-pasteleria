@@ -1,34 +1,25 @@
-<!-- CONTACTO Section con Calculadora de Pedidos -->
+<!-- CONTACTO Section de Reservas -->
 <section class="bg-stone-50 py-16 sm:py-20" aria-labelledby="contact-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <header class="text-center mb-12">
       <h2 id="contact-heading" class="text-4xl sm:text-5xl font-bold text-stone-900 animate-fade-in-up">
-        reservas & pedidos
+        reservas
       </h2>
       <p class="text-lg text-stone-600 mt-2 animate-fade-in-up" data-animation-delay="200">
         contanos tu idea ó pedido
       </p>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Calculadora de Pedidos -->
+    <div class="grid grid-cols-1 gap-8">
+      <!-- Formulario de Reservas -->
       <div class="animate-fade-in-up" data-animation-delay="400">
-          <app-order-calculator 
-            (orderCalculated)="onOrderCalculated($event)"
-            (customizeRequested)="onCustomizeRequested()"
-            (proceedToOrderEvent)="onProceedToOrder($event)">
-          </app-order-calculator>
-      </div>
-
-      <!-- Formulario de Contacto -->
-      <div class="animate-fade-in-up" data-animation-delay="600">
         <div class="card shadow-lg border-0 h-full">
-          <div class="card-header bg-gradient-to-r from-caramel to-orange-600 text-white p-4">
-            <h3 class="card-title mb-0 text-white">
+          <div class="card-header bg-white p-4">
+            <h3 class="card-title mb-0 text-caramel">
               <i class="bi bi-envelope me-2"></i>
-              Formulario de Contacto
+              Formulario de Reservas
             </h3>
-            <p class="mb-0 text-white opacity-90">Completa tus datos para procesar tu pedido</p>
+            <p class="mb-0 text-stone-600">Completa tus datos para procesar tu reserva</p>
           </div>
           
       <div class="card-body p-4 p-md-5">
@@ -244,7 +235,7 @@
               <!-- Botón de envío -->
               <button type="submit" class="btn btn-caramel btn-lg w-100 py-3 hover-lift">
                 <i class="bi bi-send me-2"></i>
-                Enviar Pedido
+                Enviar Reserva
         </button>
         
         <!-- Área de mensaje de éxito/error -->

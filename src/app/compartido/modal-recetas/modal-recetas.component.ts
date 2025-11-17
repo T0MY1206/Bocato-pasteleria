@@ -42,13 +42,14 @@ import { CommonModule } from '@angular/common';
     }
     
     .modal-header {
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      background: #ffffff;
       border-radius: 1.5rem 1.5rem 0 0;
     }
     
     .modal-title {
       font-family: 'Playfair Display', serif;
       font-size: 1.75rem;
+      color: #a0522d;
     }
     
     .btn-close {
