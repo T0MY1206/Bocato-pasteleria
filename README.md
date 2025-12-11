@@ -1,59 +1,108 @@
-# Proyecto
+# Bocato Pastelería
+
+Proyecto web para Bocato Pastelería desarrollado con Angular.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
 
-## Development server
+## 🛠️ Instalación
 
-To start a local development server, run:
+1. **Clonar el repositorio**
+   ```bash
+   git clone <repository-url>
+   cd Bocato-pasteleria
+   ```
 
-```bash
-ng serve
-```
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3. **Iniciar servidor de desarrollo**
+   ```bash
+   npm start
+   # o
+   ng serve
+   ```
 
-## Code scaffolding
+4. **Compilar para producción**
+   ```bash
+   npm run build
+   # o
+   ng build
+   ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Deployment a GitHub Pages
 
-```bash
-ng generate component component-name
-```
+### Método 1: Usando GitHub Actions (Recomendado)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+El proyecto está configurado con GitHub Actions para deployment automático. Cada vez que hagas push a la rama `main`, el workflow automáticamente:
 
-```bash
-ng generate --help
-```
+1. Compila el proyecto con el `base-href` correcto
+2. Crea un archivo `404.html` para soporte de SPA (Single Page Application)
+3. Despliega a GitHub Pages
 
-## Building
+**Pasos para activar:**
 
-To build the project run:
+1. **Habilitar GitHub Pages en el repositorio:**
+   - Ve a Settings > Pages en tu repositorio de GitHub
+   - En "Source", selecciona "GitHub Actions"
+   - Guarda los cambios
 
-```bash
-ng build
-```
+2. **Hacer push a la rama main:**
+   ```bash
+   git push origin main
+   ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+3. **Tu sitio estará disponible en:**
+   ```
+   https://<username>.github.io/Bocato-pasteleria/
+   ```
 
-## Running unit tests
+### Método 2: Deployment Manual
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. **Compilar el proyecto con base-href:**
+   ```bash
+   ng build --base-href=/Bocato-pasteleria/
+   ```
+
+2. **Instalar gh-pages:**
+   ```bash
+   npm install --save-dev gh-pages
+   ```
+
+3. **Agregar script de deploy a `package.json`:**
+   ```json
+   "scripts": {
+     "deploy": "ng build --base-href=/Bocato-pasteleria/ && gh-pages -d dist/proyecto/browser"
+   }
+   ```
+
+4. **Desplegar:**
+   ```bash
+   npm run deploy
+   ```
+
+5. **Configurar GitHub Pages:**
+   - Ve a Settings > Pages en tu repositorio
+   - Source: rama `gh-pages`
+   - Guarda
+
+## 🧪 Testing
+
+### Ejecutar tests unitarios
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Ejecutar tests end-to-end
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Angular CLI no incluye un framework de testing e2e por defecto. Puedes elegir uno que se adapte a tus necesidades.
 
-## Additional Resources
+## 📚 Recursos Adicionales
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para más información sobre Angular CLI, incluyendo referencias detalladas de comandos, visita la [página de Angular CLI Overview and Command Reference](https://angular.dev/tools/cli).
