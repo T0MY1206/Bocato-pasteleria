@@ -3,10 +3,10 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <header class="text-center mb-12">
       <h2 id="contact-heading" class="text-4xl sm:text-5xl font-bold text-stone-900 animate-fade-in-up">
-        reservas
+        {{ translate('contacto.title') }}
       </h2>
       <p class="text-lg text-stone-600 mt-2 animate-fade-in-up" data-animation-delay="200">
-        contanos tu idea ó pedido
+        {{ translate('contacto.subtitle') }}
       </p>
     </header>
 
@@ -17,9 +17,9 @@
           <div class="card-header bg-white p-4">
             <h3 class="card-title mb-0 text-caramel">
               <i class="bi bi-envelope me-2"></i>
-              Formulario de Reservas
+              {{ translate('contacto.form.title') }}
             </h3>
-            <p class="mb-0 text-stone-600">Completa tus datos para procesar tu reserva</p>
+            <p class="mb-0 text-stone-600">{{ translate('contacto.form.subtitle') }}</p>
           </div>
           
       <div class="card-body p-4 p-md-5">
@@ -28,13 +28,13 @@
               <div class="mb-4">
                 <h5 class="text-caramel font-semibold mb-3">
                   <i class="bi bi-person me-2"></i>
-                  Información Personal
+                  {{ translate('contacto.form.personalInfo') }}
                 </h5>
                 
                 <div class="row g-3">
                   <div class="col-md-6">
           <label for="name" class="form-label fw-medium text-stone-700">
-                      Nombre <span class="text-danger">*</span>
+                      {{ translate('contacto.form.name') }} <span class="text-danger">{{ translate('contacto.form.required') }}</span>
           </label>
           <input 
             type="text" 
@@ -46,7 +46,7 @@
                       class="form-control"
             [class.is-invalid]="errors.name"
             aria-required="true" 
-            placeholder="Tu nombre">
+            [placeholder]="translate('contacto.form.namePlaceholder')">
           <div *ngIf="errors.name" class="invalid-feedback" role="alert">
             {{ errors.name }}
           </div>
@@ -54,7 +54,7 @@
         
                   <div class="col-md-6">
                     <label for="phone" class="form-label fw-medium text-stone-700">
-                      Teléfono
+                      {{ translate('contacto.form.phone') }}
                     </label>
                     <input 
                       type="tel" 
@@ -62,13 +62,13 @@
                       name="phone" 
                       [(ngModel)]="formData.phone"
                       class="form-control"
-                      placeholder="+54 9 11 1234-5678">
+                      [placeholder]="translate('contacto.form.phonePlaceholder')">
                   </div>
                 </div>
                 
                 <div class="mt-3">
           <label for="email" class="form-label fw-medium text-stone-700">
-                    Email <span class="text-danger">*</span>
+                    {{ translate('contacto.form.email') }} <span class="text-danger">{{ translate('contacto.form.required') }}</span>
           </label>
           <input 
             type="email" 
@@ -79,7 +79,7 @@
                     class="form-control"
             [class.is-invalid]="errors.email"
             aria-required="true" 
-            placeholder="nombre@ejemplo.com">
+            [placeholder]="translate('contacto.form.emailPlaceholder')">
           <div *ngIf="errors.email" class="invalid-feedback" role="alert">
             {{ errors.email }}
                   </div>
@@ -90,13 +90,13 @@
               <div class="mb-4">
                 <h5 class="text-caramel font-semibold mb-3">
                   <i class="bi bi-calendar-event me-2"></i>
-                  Detalles del Pedido
+                  {{ translate('contacto.form.orderDetails') }}
                 </h5>
                 
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label for="eventDate" class="form-label fw-medium text-stone-700">
-                      Fecha del Evento
+                      {{ translate('contacto.form.eventDate') }}
                     </label>
                     <input 
                       type="date" 
@@ -109,7 +109,7 @@
                   
                   <div class="col-md-6">
                     <label for="guestCount" class="form-label fw-medium text-stone-700">
-                      Cantidad de Invitados
+                      {{ translate('contacto.form.guestCount') }}
                     </label>
                     <input 
                       type="number" 
@@ -119,7 +119,7 @@
                       min="1"
                       max="200"
                       class="form-control"
-                      placeholder="Ej: 25">
+                      [placeholder]="translate('contacto.form.guestCountPlaceholder')">
                   </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
               <!-- Mensaje -->
         <div class="mb-4">
           <label for="message" class="form-label fw-medium text-stone-700">
-                  Pedido ó Consulta <span class="text-danger">*</span>
+                  {{ translate('contacto.form.message') }} <span class="text-danger">{{ translate('contacto.form.required') }}</span>
           </label>
           <textarea 
             id="message" 
@@ -138,7 +138,7 @@
                   class="form-control"
             [class.is-invalid]="errors.message"
             aria-required="true" 
-                  placeholder="Detalla tu pedido, preferencias especiales, alergias, etc."></textarea>
+            [placeholder]="translate('contacto.form.messagePlaceholder')"></textarea>
           <div *ngIf="errors.message" class="invalid-feedback" role="alert">
             {{ errors.message }}
           </div>
@@ -148,30 +148,30 @@
               <div class="mb-4">
                 <h5 class="text-caramel font-semibold mb-3">
                   <i class="bi bi-info-circle me-2"></i>
-                  Información Adicional
+                  {{ translate('contacto.form.eventInfo') }}
                 </h5>
                 
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label class="form-label fw-medium text-stone-700">Tipo de Evento</label>
+                    <label class="form-label fw-medium text-stone-700">{{ translate('contacto.form.eventType') }}</label>
                     <select 
                       [(ngModel)]="formData.eventType"
                       name="eventType"
                       class="form-select">
-                      <option value="">Selecciona el tipo de evento</option>
-                      <option value="cumpleanos">Cumpleaños</option>
-                      <option value="boda">Boda</option>
-                      <option value="corporativo">Evento Corporativo</option>
-                      <option value="graduacion">Graduación</option>
-                      <option value="baby-shower">Baby Shower</option>
-                      <option value="otro">Otro</option>
+                      <option value="">{{ translate('contacto.form.eventTypePlaceholder') }}</option>
+                      <option value="cumpleanos">{{ translate('carta.eventos.tortas.birthday') }}</option>
+                      <option value="boda">{{ translate('carta.eventos.tortas.wedding') }}</option>
+                      <option value="corporativo">{{ translate('carta.eventos.tortas.corporate') }}</option>
+                      <option value="graduacion">{{ translate('contacto.form.graduation') }}</option>
+                      <option value="baby-shower">{{ translate('contacto.form.babyShower') }}</option>
+                      <option value="otro">{{ translate('contacto.form.other') }}</option>
                     </select>
                   </div>
                   
                   <div class="col-md-6">
-                    <label class="form-label fw-medium text-stone-700">Presupuesto Estimado</label>
+                    <label class="form-label fw-medium text-stone-700">{{ translate('contacto.form.budget') }}</label>
                     <div class="input-group">
-                      <span class="input-group-text">$</span>
+                      <span class="input-group-text">{{ translate('common.currency') }}</span>
                       <input 
                         type="number" 
                         [(ngModel)]="formData.budget"
@@ -180,7 +180,7 @@
                         max="100000"
                         step="1000"
                         class="form-control"
-                        placeholder="Ej: 25000">
+                        [placeholder]="translate('contacto.form.budgetPlaceholder')">
                     </div>
                   </div>
                 </div>
@@ -188,7 +188,7 @@
 
               <!-- Preferencias especiales -->
               <div class="mb-4">
-                <label class="form-label fw-medium text-stone-700">Preferencias Especiales</label>
+                <label class="form-label fw-medium text-stone-700">{{ translate('contacto.form.preferences') }}</label>
                 <div class="row g-2">
                   <div class="col-md-4">
                     <div class="form-check">
@@ -199,7 +199,7 @@
                         name="sinGluten"
                         id="sinGluten">
                       <label class="form-check-label" for="sinGluten">
-                        Sin Gluten
+                        {{ translate('contacto.form.sinGluten') }}
                       </label>
                     </div>
                   </div>
@@ -212,7 +212,7 @@
                         name="vegano"
                         id="vegano">
                       <label class="form-check-label" for="vegano">
-                        Opciones Veganas
+                        {{ translate('contacto.form.vegano') }}
                       </label>
                     </div>
                   </div>
@@ -225,7 +225,7 @@
                         name="sugarFree"
                         id="sugarFree">
                       <label class="form-check-label" for="sugarFree">
-                        Sin Azúcar
+                        {{ translate('contacto.form.sugarFree') }}
                       </label>
                     </div>
                   </div>
@@ -233,9 +233,9 @@
               </div>
               
               <!-- Botón de envío -->
-              <button type="submit" class="btn btn-caramel btn-lg w-100 py-3 hover-lift">
+              <button type="submit" class="btn btn-caramel w-100 py-2 hover-lift submit-reservation-btn">
                 <i class="bi bi-send me-2"></i>
-                Enviar Reserva
+                {{ translate('contacto.form.submit') }}
         </button>
         
         <!-- Área de mensaje de éxito/error -->
@@ -260,7 +260,7 @@
             <div class="text-caramel text-3xl mb-3">
               <i class="bi bi-telephone"></i>
             </div>
-            <h5 class="font-semibold text-stone-800 mb-2">Teléfono</h5>
+            <h5 class="font-semibold text-stone-800 mb-2">{{ translate('contacto.contactInfo.phone') }}</h5>
             <p class="text-stone-600">+54 9 292 343-8316</p>
           </div>
         </div>
@@ -270,7 +270,7 @@
             <div class="text-caramel text-3xl mb-3">
               <i class="bi bi-envelope"></i>
             </div>
-            <h5 class="font-semibold text-stone-800 mb-2">Email</h5>
+            <h5 class="font-semibold text-stone-800 mb-2">{{ translate('contacto.contactInfo.email') }}</h5>
             <p class="text-stone-600">pasteleriabocato@gmail.com</p>
           </div>
         </div>
@@ -280,8 +280,8 @@
             <div class="text-caramel text-3xl mb-3">
               <i class="bi bi-clock"></i>
             </div>
-            <h5 class="font-semibold text-stone-800 mb-2">Horarios</h5>
-            <p class="text-stone-600">Lun - Vie: 8:00 - 20:00<br>Sáb: 9:00 - 18:00</p>
+            <h5 class="font-semibold text-stone-800 mb-2">{{ translate('contacto.contactInfo.hours') }}</h5>
+            <p class="text-stone-600">{{ translate('contacto.contactInfo.weekdays') }}<br>{{ translate('contacto.contactInfo.weekends') }}</p>
           </div>
         </div>
       </div>

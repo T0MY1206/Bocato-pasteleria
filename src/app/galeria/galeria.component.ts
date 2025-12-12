@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalRecetasComponent } from '../compartido/modal-recetas/modal-recetas.component';
 import { SearchAdvancedComponent } from '../compartido/search-advanced/search-advanced.component';
 import { AnimationsService } from '../services/animations.service';
+import { LanguageService } from '../services/language.service';
 import { SearchResult } from '../services/search.service';
 
 @Component({
@@ -25,11 +26,11 @@ export class GaleriaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Filtros y búsqueda
   quickFilters = [
-    { id: 'all', name: 'Todos', icon: 'bi bi-grid-3x3' },
-    { id: 'tortas', name: 'Tortas', icon: 'bi bi-cake' },
-    { id: 'bolleria', name: 'Bollería', icon: 'bi bi-basket' },
-    { id: 'catering', name: 'Catering', icon: 'bi bi-calendar-event' },
-    { id: 'signature', name: 'Signature', icon: 'bi bi-star-fill' }
+    { id: 'all', nameKey: 'galeria.filters.all', icon: 'bi bi-grid-3x3' },
+    { id: 'tortas', nameKey: 'galeria.filters.tortas', icon: 'bi bi-cake' },
+    { id: 'bolleria', nameKey: 'galeria.filters.bolleria', icon: 'bi bi-basket' },
+    { id: 'catering', nameKey: 'galeria.filters.catering', icon: 'bi bi-calendar-event' },
+    { id: 'signature', nameKey: 'galeria.filters.signature', icon: 'bi bi-star-fill' }
   ];
   activeFilter = 'all';
 
@@ -41,15 +42,22 @@ export class GaleriaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Carrusel de productos
   productos = [
-    { id: 1, nombre: 'tarta de Mango & Maracuyá', imagen: 'assets/mangoymaracuya.jpg' },
-    { id: 2, nombre: 'croissant de Doble Chocolate', imagen: 'assets/chococro.jpg' },
-    { id: 3, nombre: 'bride', imagen: 'assets/mesadulce.jpg' }
+    { id: 1, nombreKey: 'galeria.products.mango', imagen: 'assets/mangoymaracuya.jpg' },
+    { id: 2, nombreKey: 'galeria.products.croissant', imagen: 'assets/chococro.jpg' },
+    { id: 3, nombreKey: 'galeria.products.bride', imagen: 'assets/mesadulce.jpg' }
   ];
 
   currentIndex = 0;
   private carouselInterval: any;
 
-  constructor(private animationsService: AnimationsService) {}
+  constructor(
+    private animationsService: AnimationsService,
+    public languageService: LanguageService
+  ) {}
+
+  translate(key: string): string {
+    return this.languageService.translate(key);
+  }
 
   ngOnInit(): void {
     this.loadFavorites();
@@ -138,7 +146,7 @@ export class GaleriaComponent implements OnInit, AfterViewInit, OnDestroy {
   applyQuickFilter(filter: any) {
     this.activeFilter = filter.id;
     // Aquí implementarías la lógica de filtrado
-    console.log('Aplicando filtro:', filter.name);
+    console.log('Aplicando filtro:', this.translate(filter.nameKey));
   }
 
   // Métodos de favoritos

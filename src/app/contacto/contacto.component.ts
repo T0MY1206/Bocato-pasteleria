@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AnimationsService } from '../services/animations.service';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-contacto',
@@ -36,7 +37,14 @@ export class ContactoComponent implements OnInit, AfterViewInit {
   showMessage = false;
   minDate = '';
 
-  constructor(private animationsService: AnimationsService) {}
+  constructor(
+    private animationsService: AnimationsService,
+    public languageService: LanguageService
+  ) {}
+
+  translate(key: string): string {
+    return this.languageService.translate(key);
+  }
 
   ngOnInit(): void {
     // Establecer fecha mínima (hoy)
@@ -76,25 +84,25 @@ export class ContactoComponent implements OnInit, AfterViewInit {
 
     // Validación de Nombre
     if (!this.formData.name.trim()) {
-      this.errors.name = 'El nombre es obligatorio.';
+      this.errors.name = this.translate('contacto.form.validation.nameRequired');
       isValid = false;
     } else if (!this.isValidName(this.formData.name)) {
-      this.errors.name = 'El nombre solo puede contener letras y espacios.';
+      this.errors.name = this.translate('contacto.form.validation.nameInvalid');
       isValid = false;
     }
 
     // Validación de Email
     if (!this.formData.email.trim()) {
-      this.errors.email = 'El correo electrónico es obligatorio.';
+      this.errors.email = this.translate('contacto.form.validation.emailRequired');
       isValid = false;
     } else if (!this.isValidEmail(this.formData.email)) {
-      this.errors.email = 'Ingresa un correo válido.';
+      this.errors.email = this.translate('contacto.form.validation.emailInvalid');
       isValid = false;
     }
 
     // Validación de Mensaje
     if (!this.formData.message.trim()) {
-      this.errors.message = 'El mensaje es obligatorio.';
+      this.errors.message = this.translate('contacto.form.validation.messageRequired');
       isValid = false;
     }
 
@@ -158,13 +166,13 @@ export class ContactoComponent implements OnInit, AfterViewInit {
         message: completeMessage
       });
       
-      this.formMessage = '✅ ¡Gracias! Tu reserva ha sido enviada. Te contactaremos pronto para confirmar los detalles.';
+      this.formMessage = this.translate('contacto.form.success');
       this.showMessage = true;
       
       // Limpiar el formulario
       this.resetForm();
     } else {
-      this.formMessage = '❌ Por favor, revisa y corrige los campos marcados en rojo para enviar tu reserva.';
+      this.formMessage = this.translate('contacto.form.error');
       this.showMessage = true;
     }
   }

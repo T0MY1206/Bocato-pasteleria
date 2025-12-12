@@ -2,13 +2,13 @@
 <section class="bg-stone-50 py-16 sm:py-20" aria-labelledby="menu-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <header class="text-center mb-12">
-      <h2 id="menu-heading" class="text-4xl sm:text-5xl font-bold text-stone-900">nuestra dolce carta</h2>
-      <p class="text-lg text-stone-600 mt-2">sabores clásicos y creaciones by BOCATO.</p>
+      <h2 id="menu-heading" class="text-4xl sm:text-5xl font-bold text-stone-900">{{ translate('carta.title') }}</h2>
+      <p class="text-lg text-stone-600 mt-2">{{ translate('carta.subtitle') }}</p>
     </header>
 
     <!-- PESTAÑAS (Tabs) -->
     <div class="container-fluid px-0">
-      <ul class="nav nav-tabs nav-justified border-0" role="tablist" aria-label="Categorías del Menú">
+      <ul class="nav nav-tabs nav-justified border-0" role="tablist" [attr.aria-label]="translate('carta.tabs.clasicos') + ', ' + translate('carta.tabs.patisserie') + ', ' + translate('carta.tabs.eventos')">
         <li class="nav-item" role="presentation">
         <button 
           (click)="setActiveTab('tortas')"
@@ -17,7 +17,7 @@
           role="tab" 
           [attr.aria-selected]="activeTab === 'tortas'"
             aria-controls="panel-tortas">
-          clásicos
+          {{ translate('carta.tabs.clasicos') }}
         </button>
         </li>
         <li class="nav-item" role="presentation">
@@ -28,7 +28,7 @@
           role="tab" 
           [attr.aria-selected]="activeTab === 'patisserie'"
             aria-controls="panel-patisserie">
-          patisserie by BOCATO
+          {{ translate('carta.tabs.patisserie') }}
         </button>
         </li>
         <li class="nav-item" role="presentation">
@@ -39,7 +39,7 @@
           role="tab" 
           [attr.aria-selected]="activeTab === 'eventos'"
             aria-controls="panel-eventos">
-          eventos
+          {{ translate('carta.tabs.eventos') }}
         </button>
         </li>
       </ul>
@@ -53,31 +53,31 @@
           aria-labelledby="tab-tortas"
           class="card shadow-lg border-0">
           <div class="card-body p-4 p-md-5">
-          <h3 class="text-2xl font-semibold text-caramel mb-4">nuestros clásicos inolvidables</h3>
-          <p class="text-stone-700 mb-6">- especialidades de cafetería y pastelería artesanal -</p>
+          <h3 class="text-2xl font-semibold text-caramel mb-4">{{ translate('carta.clasicos.title') }}</h3>
+          <p class="text-stone-700 mb-6">- {{ translate('carta.clasicos.subtitle') }} -</p>
           
       <!-- CAFÉS ESPECIALES -->
       <div class="mb-6">
         <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
           <i class="bi bi-cup-hot text-caramel"></i>
-          Cafés Especiales
+          {{ translate('carta.clasicos.cafes.title') }}
         </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Cappuccino Clásico</span>
-                <span class="font-semibold text-caramel">$1.200</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.cafes.cappuccino') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.200</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Latte Art</span>
-                <span class="font-semibold text-caramel">$1.400</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.cafes.latte') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.400</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Mocha con Chocolate Belga</span>
-                <span class="font-semibold text-caramel">$1.600</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.cafes.mocha') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.600</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Café Cold Brew</span>
-                <span class="font-semibold text-caramel">$1.300</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.cafes.coldBrew') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.300</span>
               </div>
             </div>
           </div>
@@ -86,24 +86,24 @@
       <div class="mb-6">
         <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
           <i class="bi bi-star-fill text-caramel"></i>
-          Tortas Clásicas
+          {{ translate('carta.clasicos.tortas.title') }}
         </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Cheesecake de Frutos Rojos</span>
-                <span class="font-semibold text-caramel">$3.200</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.tortas.cheesecake') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}3.200</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Red Velvet</span>
-                <span class="font-semibold text-caramel">$2.800</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.tortas.redVelvet') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.800</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Lemon Pie</span>
-                <span class="font-semibold text-caramel">$2.600</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.tortas.lemon') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.600</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Torta de Chocolate Belga</span>
-                <span class="font-semibold text-caramel">$3.000</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.tortas.chocolate') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}3.000</span>
               </div>
             </div>
           </div>
@@ -112,24 +112,24 @@
       <div class="mb-6">
         <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
           <i class="bi bi-check-circle-fill text-caramel"></i>
-          Pastelería Fina
+          {{ translate('carta.clasicos.pasteles.title') }}
         </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Croissant de Mantequilla</span>
-                <span class="font-semibold text-caramel">$800</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.pasteles.croissant') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}800</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Pain au Chocolat</span>
-                <span class="font-semibold text-caramel">$950</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.pasteles.painChocolat') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}950</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Almendrado</span>
-                <span class="font-semibold text-caramel">$1.100</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.pasteles.almendrado') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.100</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Canelé de Burdeos</span>
-                <span class="font-semibold text-caramel">$900</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.pasteles.canele') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}900</span>
               </div>
             </div>
           </div>
@@ -138,20 +138,20 @@
       <div>
         <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
           <i class="bi bi-snow text-caramel"></i>
-          Bebidas Frías
+          {{ translate('carta.clasicos.bebidas.title') }}
         </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Frappé de Vainilla</span>
-                <span class="font-semibold text-caramel">$1.500</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.bebidas.frappe') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.500</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Smoothie de Frutos Rojos</span>
-                <span class="font-semibold text-caramel">$1.400</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.bebidas.smoothie') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.400</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Iced Matcha Latte</span>
-                <span class="font-semibold text-caramel">$1.600</span>
+                <span class="text-stone-700">{{ translate('carta.clasicos.bebidas.matcha') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.600</span>
               </div>
               </div>
             </div>
@@ -165,63 +165,63 @@
           aria-labelledby="tab-patisserie"
           class="card shadow-lg border-0">
           <div class="card-body p-4 p-md-5">
-          <h3 class="text-2xl font-semibold text-caramel mb-4">patisserie by BOCATO</h3>
-          <p class="text-stone-700 mb-6">- creaciones únicas que definen nuestra identidad dulce -</p>
+          <h3 class="text-2xl font-semibold text-caramel mb-4">{{ translate('carta.patisserie.title') }}</h3>
+          <p class="text-stone-700 mb-6">- {{ translate('carta.patisserie.subtitle') }} -</p>
           
           <!-- SIGNATURE COLLECTION -->
           <div class="mb-8">
             <h4 class="text-xl font-bold text-stone-800 mb-4 flex items-center gap-2">
               <i class="bi bi-gem text-caramel"></i>
-              Signature Collection
+              {{ translate('carta.patisserie.signature.title') }}
             </h4>
-            <p class="text-sm text-stone-600 mb-4 italic">Nuestras creaciones más exclusivas, disponibles solo en BOCATO</p>
+            <p class="text-sm text-stone-600 mb-4 italic">{{ translate('carta.patisserie.signature.description') }}</p>
             
             <div class="grid md:grid-cols-2 gap-4">
-              <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-lg border border-amber-200">
+              <div class="signature-card bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-lg border border-amber-200">
                 <div class="flex justify-between items-start mb-2">
-                  <h5 class="font-semibold text-stone-800">BOCATO Golden Delight</h5>
-                  <span class="font-bold text-caramel">$4.500</span>
+                  <h5 class="signature-card-title font-semibold text-stone-800">{{ translate('carta.patisserie.signature.goldenDelight') }}</h5>
+                  <span class="font-bold text-caramel">{{ translate('common.currency') }}4.500</span>
                 </div>
-                <p class="text-sm text-stone-600 mb-2">Torta de chocolate belga con caramelo líquido, cubierta con láminas de oro comestible y decoración artística.</p>
+                <p class="text-sm text-stone-600 mb-2">{{ translate('carta.patisserie.signature.goldenDelightDesc') }}</p>
                 <div class="flex items-center gap-1 text-xs text-caramel">
                   <span>⭐</span>
-                  <span>Signature</span>
+                  <span>{{ translate('carta.patisserie.signature.signature') }}</span>
                 </div>
               </div>
               
-              <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-4 rounded-lg border border-rose-200">
+              <div class="signature-card bg-gradient-to-br from-rose-50 to-pink-50 p-4 rounded-lg border border-rose-200">
                 <div class="flex justify-between items-start mb-2">
-                  <h5 class="font-semibold text-stone-800">Rose Petal Éclair</h5>
-                  <span class="font-bold text-caramel">$2.800</span>
+                  <h5 class="signature-card-title font-semibold text-stone-800">{{ translate('carta.patisserie.signature.roseEclair') }}</h5>
+                  <span class="font-bold text-caramel">{{ translate('common.currency') }}2.800</span>
                 </div>
-                <p class="text-sm text-stone-600 mb-2">Éclair relleno de crema de rosa francesa, decorado con pétalos de rosa cristalizados y glaseado rosa.</p>
+                <p class="text-sm text-stone-600 mb-2">{{ translate('carta.patisserie.signature.roseEclairDesc') }}</p>
                 <div class="flex items-center gap-1 text-xs text-caramel">
                   <span>⭐</span>
-                  <span>Signature</span>
+                  <span>{{ translate('carta.patisserie.signature.signature') }}</span>
                 </div>
               </div>
               
-              <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-lg border border-green-200">
+              <div class="signature-card bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-lg border border-green-200">
                 <div class="flex justify-between items-start mb-2">
-                  <h5 class="font-semibold text-stone-800">Matcha Zen Garden</h5>
-                  <span class="font-bold text-caramel">$3.200</span>
+                  <h5 class="signature-card-title font-semibold text-stone-800">{{ translate('carta.patisserie.signature.matchaZen') }}</h5>
+                  <span class="font-bold text-caramel">{{ translate('common.currency') }}3.200</span>
                 </div>
-                <p class="text-sm text-stone-600 mb-2">Tarta de matcha premium con base de galleta de sésamo negro, decorada como un jardín zen en miniatura.</p>
+                <p class="text-sm text-stone-600 mb-2">{{ translate('carta.patisserie.signature.matchaZenDesc') }}</p>
                 <div class="flex items-center gap-1 text-xs text-caramel">
                   <span>⭐</span>
-                  <span>Signature</span>
+                  <span>{{ translate('carta.patisserie.signature.signature') }}</span>
                 </div>
               </div>
               
-              <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-lg border border-purple-200">
+              <div class="signature-card bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-lg border border-purple-200">
                 <div class="flex justify-between items-start mb-2">
-                  <h5 class="font-semibold text-stone-800">Lavender Dreams</h5>
-                  <span class="font-bold text-caramel">$2.600</span>
+                  <h5 class="signature-card-title font-semibold text-stone-800">{{ translate('carta.patisserie.signature.lavender') }}</h5>
+                  <span class="font-bold text-caramel">{{ translate('common.currency') }}2.600</span>
                 </div>
-                <p class="text-sm text-stone-600 mb-2">Macaron gigante de lavanda con crema de miel y decoración de flores comestibles de lavanda.</p>
+                <p class="text-sm text-stone-600 mb-2">{{ translate('carta.patisserie.signature.lavenderDesc') }}</p>
                 <div class="flex items-center gap-1 text-xs text-caramel">
                   <span>⭐</span>
-                  <span>Signature</span>
+                  <span>{{ translate('carta.patisserie.signature.signature') }}</span>
                 </div>
               </div>
             </div>
@@ -231,51 +231,51 @@
           <div class="mb-8">
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-circle-fill text-caramel"></i>
-              Macarons Collection
+              {{ translate('carta.patisserie.macarons.title') }}
             </h4>
             <div class="grid md:grid-cols-3 gap-3">
               <div class="flex justify-between items-center py-2 px-3 bg-stone-50 rounded-lg">
-                <span class="text-stone-700">Caja de 6 Macarons Clásicos</span>
-                <span class="font-semibold text-caramel">$4.200</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.macarons.box6') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}4.200</span>
               </div>
               <div class="flex justify-between items-center py-2 px-3 bg-stone-50 rounded-lg">
-                <span class="text-stone-700">Caja de 12 Macarons Premium</span>
-                <span class="font-semibold text-caramel">$7.800</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.macarons.box12') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}7.800</span>
               </div>
               <div class="flex justify-between items-center py-2 px-3 bg-stone-50 rounded-lg">
-                <span class="text-stone-700">Caja de 24 Macarons Luxury</span>
-                <span class="font-semibold text-caramel">$14.400</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.macarons.box24') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}14.400</span>
               </div>
             </div>
-            <p class="text-xs text-stone-500 mt-2 italic">Sabores: Pistacho, Rosa, Maracuyá, Chocolate Belga, Vainilla Bourbon, Lavanda</p>
+            <p class="text-xs text-stone-500 mt-2 italic">{{ translate('carta.patisserie.macarons.flavors') }}</p>
           </div>
 
           <!-- PETIT FOURS -->
           <div class="mb-8">
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-check-circle-fill text-caramel"></i>
-              Petit Fours Gourmet
+              {{ translate('carta.patisserie.petitFours.title') }}
             </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Mini Opera Cake</span>
-                <span class="font-semibold text-caramel">$1.800</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.petitFours.opera') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.800</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Canelé de Burdeos</span>
-                <span class="font-semibold text-caramel">$900</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.petitFours.canele') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}900</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Madeleine de Lavanda</span>
-                <span class="font-semibold text-caramel">$1.200</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.petitFours.madeleine') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.200</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Financier de Almendra</span>
-                <span class="font-semibold text-caramel">$1.100</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.petitFours.financier') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.100</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Tartelette de Frutos Rojos</span>
-                <span class="font-semibold text-caramel">$1.500</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.petitFours.tartelette') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.500</span>
               </div>
             </div>
           </div>
@@ -284,17 +284,17 @@
           <div class="mb-6">
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-calendar-event text-caramel"></i>
-              Especialidades de Temporada
+              {{ translate('carta.patisserie.temporada.title') }}
             </h4>
-            <div class="bg-gradient-to-r from-amber-100 to-orange-100 p-4 rounded-lg border border-amber-200">
+            <div class="signature-card bg-gradient-to-r from-amber-100 to-orange-100 p-4 rounded-lg border border-amber-200">
               <div class="flex justify-between items-center mb-2">
-                <h5 class="font-semibold text-stone-800">Torta de Calabaza & Especias</h5>
-                <span class="font-bold text-caramel">$3.800</span>
+                <h5 class="signature-card-title font-semibold text-stone-800">{{ translate('carta.patisserie.temporada.calabaza') }}</h5>
+                <span class="font-bold text-caramel">{{ translate('common.currency') }}3.800</span>
               </div>
-              <p class="text-sm text-stone-600 mb-2">Torta de calabaza con especias de otoño, crema de queso mascarpone y decoración de hojas de arce comestibles.</p>
+              <p class="text-sm text-stone-600 mb-2">{{ translate('carta.patisserie.temporada.calabazaDesc') }}</p>
               <div class="flex items-center gap-2 text-xs">
-                <span class="bg-caramel text-white px-2 py-1 rounded-full">Temporada</span>
-                <span class="text-caramel">Disponible hasta diciembre</span>
+                <span class="bg-caramel text-white px-2 py-1 rounded-full">{{ translate('carta.patisserie.temporada.temporada') }}</span>
+                <span class="text-caramel">{{ translate('carta.patisserie.temporada.disponible') }}</span>
               </div>
             </div>
           </div>
@@ -303,24 +303,24 @@
           <div>
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-cup-hot text-caramel"></i>
-              Bebidas Signature
+              {{ translate('carta.patisserie.bebidasSignature.title') }}
             </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">BOCATO Golden Latte</span>
-                <span class="font-semibold text-caramel">$2.200</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.bebidasSignature.goldenLatte') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.200</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Matcha Ceremony</span>
-                <span class="font-semibold text-caramel">$2.500</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.bebidasSignature.matchaCeremony') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.500</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Lavender Honey Tea</span>
-                <span class="font-semibold text-caramel">$1.800</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.bebidasSignature.lavenderTea') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.800</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Rose Petal Cappuccino</span>
-                <span class="font-semibold text-caramel">$2.000</span>
+                <span class="text-stone-700">{{ translate('carta.patisserie.bebidasSignature.roseCappuccino') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.000</span>
               </div>
             </div>
           </div>
@@ -334,38 +334,38 @@
           aria-labelledby="tab-eventos"
           class="card shadow-lg border-0">
           <div class="card-body p-4 p-md-5">
-          <h3 class="text-2xl font-semibold text-caramel mb-4">sweet catering</h3>
-          <p class="text-stone-700 mb-6">- combos especializados para eventos únicos -</p>
+          <h3 class="text-2xl font-semibold text-caramel mb-4">{{ translate('carta.eventos.title') }}</h3>
+          <p class="text-stone-700 mb-6">- {{ translate('carta.eventos.subtitle') }} -</p>
           
           <!-- COMBO BÁSICO -->
           <div class="mb-6">
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-star text-caramel"></i>
-              Combo Básico
+              {{ translate('carta.eventos.catering.basico.title') }}
             </h4>
-            <p class="text-sm text-stone-600 mb-3">Perfecto para cumpleaños y reuniones familiares</p>
+            <p class="text-sm text-stone-600 mb-3">{{ translate('carta.eventos.catering.basico.description') }}</p>
             <div class="space-y-2 mb-3">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Torta principal (20-25 porciones)</span>
-                <span class="font-semibold text-caramel">$8.500</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.basico.torta') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}8.500</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• 12 Cupcakes variados</span>
-                <span class="font-semibold text-caramel">$4.200</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.basico.cupcakes') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}4.200</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• 20 Alfajores artesanales</span>
-                <span class="font-semibold text-caramel">$3.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.basico.alfajores') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}3.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Montaje y decoración básica</span>
-                <span class="font-semibold text-caramel">$2.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.basico.montaje') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.000</span>
               </div>
             </div>
             <div class="border-t border-gray-200 pt-2">
               <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-stone-800">Total Combo Básico</span>
-                <span class="text-xl font-bold text-caramel">$17.700</span>
+                <span class="text-lg font-bold text-stone-800">{{ translate('carta.eventos.catering.basico.total') }}</span>
+                <span class="text-xl font-bold text-caramel">{{ translate('common.currency') }}17.700</span>
               </div>
             </div>
           </div>
@@ -374,35 +374,35 @@
           <div class="mb-6">
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-star-fill text-caramel"></i>
-              Combo Premium
+              {{ translate('carta.eventos.catering.premium.title') }}
             </h4>
-            <p class="text-sm text-stone-600 mb-3">Ideal para bodas y eventos corporativos</p>
+            <p class="text-sm text-stone-600 mb-3">{{ translate('carta.eventos.catering.premium.description') }}</p>
             <div class="space-y-2 mb-3">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Torta principal (40-50 porciones)</span>
-                <span class="font-semibold text-caramel">$15.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.premium.torta') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}15.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• 24 Macarons de lujo</span>
-                <span class="font-semibold text-caramel">$7.200</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.premium.macarons') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}7.200</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• 30 Petit Fours variados</span>
-                <span class="font-semibold text-caramel">$6.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.premium.petitFours') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}6.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Mesa dulce temática completa</span>
-                <span class="font-semibold text-caramel">$8.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.premium.mesa') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}8.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Servicio de catering completo</span>
-                <span class="font-semibold text-caramel">$5.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.premium.servicio') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}5.000</span>
               </div>
             </div>
             <div class="border-t border-gray-200 pt-2">
               <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-stone-800">Total Combo Premium</span>
-                <span class="text-xl font-bold text-caramel">$41.200</span>
+                <span class="text-lg font-bold text-stone-800">{{ translate('carta.eventos.catering.premium.total') }}</span>
+                <span class="text-xl font-bold text-caramel">{{ translate('common.currency') }}41.200</span>
               </div>
             </div>
           </div>
@@ -411,39 +411,39 @@
           <div class="mb-6">
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-gem text-caramel"></i>
-              Combo Luxury
+              {{ translate('carta.eventos.catering.luxury.title') }}
             </h4>
-            <p class="text-sm text-stone-600 mb-3">Para eventos exclusivos y celebraciones especiales</p>
+            <p class="text-sm text-stone-600 mb-3">{{ translate('carta.eventos.catering.luxury.description') }}</p>
             <div class="space-y-2 mb-3">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Torta principal (60-80 porciones)</span>
-                <span class="font-semibold text-caramel">$22.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.luxury.torta') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}22.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• 36 Macarons premium</span>
-                <span class="font-semibold text-caramel">$10.800</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.luxury.macarons') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}10.800</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• 50 Petit Fours gourmet</span>
-                <span class="font-semibold text-caramel">$10.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.luxury.petitFours') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}10.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Mesa dulce temática + diseño personalizado</span>
-                <span class="font-semibold text-caramel">$12.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.luxury.mesa') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}12.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Servicio completo + coordinador de evento</span>
-                <span class="font-semibold text-caramel">$8.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.luxury.servicio') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}8.000</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">• Opciones sin gluten y veganas</span>
-                <span class="font-semibold text-caramel">$3.000</span>
+                <span class="text-stone-700">• {{ translate('carta.eventos.catering.luxury.opciones') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}3.000</span>
               </div>
             </div>
             <div class="border-t border-gray-200 pt-2">
               <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-stone-800">Total Combo Luxury</span>
-                <span class="text-xl font-bold text-caramel">$64.800</span>
+                <span class="text-lg font-bold text-stone-800">{{ translate('carta.eventos.catering.luxury.total') }}</span>
+                <span class="text-xl font-bold text-caramel">{{ translate('common.currency') }}64.800</span>
               </div>
             </div>
           </div>
@@ -452,20 +452,20 @@
           <div>
             <h4 class="text-lg font-semibold text-stone-800 mb-3 flex items-center gap-2">
               <i class="bi bi-plus-circle text-caramel"></i>
-              Servicios Adicionales
+              {{ translate('carta.eventos.catering.adicionales.title') }}
             </h4>
             <div class="space-y-2">
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Diseño temático personalizado</span>
-                <span class="font-semibold text-caramel">$2.500</span>
+                <span class="text-stone-700">{{ translate('carta.eventos.catering.adicionales.diseño') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}2.500</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Entrega y montaje en sitio</span>
-                <span class="font-semibold text-caramel">$1.500</span>
+                <span class="text-stone-700">{{ translate('carta.eventos.catering.adicionales.entrega') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}1.500</span>
               </div>
               <div class="flex justify-between items-center py-1">
-                <span class="text-stone-700">Coordinador de evento</span>
-                <span class="font-semibold text-caramel">$3.000</span>
+                <span class="text-stone-700">{{ translate('carta.eventos.catering.adicionales.coordinador') }}</span>
+                <span class="font-semibold text-caramel">{{ translate('common.currency') }}3.000</span>
               </div>
               </div>
             </div>

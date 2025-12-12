@@ -26,7 +26,7 @@
 }
 
 .gallery-card:hover .gallery-content {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: var(--bg-tertiary);
 }
 
 /* Efecto de brillo sutil en hover */
@@ -273,9 +273,10 @@ header h2 {
 .carousel-card {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: var(--bg-tertiary);
   border-radius: 1rem;
   overflow: hidden;
+  border: 1px solid var(--border-color);
 }
 
 .carousel-image-container {
@@ -299,13 +300,13 @@ header h2 {
 .carousel-content {
   padding: 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: var(--bg-tertiary);
 }
 
 .carousel-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #1c1917;
+  color: var(--text-primary);
   margin: 0;
   text-transform: lowercase;
   letter-spacing: 0.05em;
