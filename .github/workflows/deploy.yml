@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build -- --base-href=/Bocato-pasteleria/
+        continue-on-error: false
+
+      - name: List build output
+        run: |
+          echo "Checking build output structure..."
+          ls -la dist/ || echo "dist/ directory not found"
+          ls -la dist/proyecto/ || echo "dist/proyecto/ directory not found"
+          ls -la dist/proyecto/browser/ || echo "dist/proyecto/browser/ directory not found"
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist/proyecto/browser" ]; then
+            echo "Error: Build output directory not found"
+            ls -la dist/
+            exit 1
+          fi
+          if [ ! -f "dist/proyecto/browser/index.html" ]; then
+            echo "Error: index.html not found in build output"
+            ls -la dist/proyecto/browser/
+            exit 1
+          fi
+          echo "Build output verified successfully"
+
+      - name: Copy 404 fallback for SPA
+        run: cp dist/proyecto/browser/index.html dist/proyecto/browser/404.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/proyecto/browser
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -11,54 +11,79 @@
           BOCATO
         </a>
 
-        <!-- Botón de Menú Móvil (Hamburguesa) -->
-        <button 
-          (click)="toggleMenu()"
-          class="sm:hidden p-2 rounded-md text-stone-600 hover:text-caramel hover:bg-stone-50 transition duration-150 ease-in-out focus:outline-none"
-          [attr.aria-expanded]="isMenuOpen" 
-          aria-controls="mobile-menu" 
-          aria-label="Abrir menú principal">
-          <!-- Icono de Hamburguesa (Abre) -->
-          <svg *ngIf="!isMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
-          <!-- Icono de Cerrar (Cierra) -->
-          <svg *ngIf="isMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <!-- Controles de Idioma y Tema + Menú -->
+        <div class="flex items-center gap-4">
+          <!-- Controles de Idioma y Tema -->
+          <div class="hidden sm:flex items-center gap-2">
+            <!-- Toggle Idioma -->
+            <button 
+              (click)="toggleLanguage()"
+              class="p-2 rounded-md text-stone-600 hover:text-caramel hover:bg-stone-50 transition duration-150 ease-in-out focus:outline-none"
+              [attr.aria-label]="languageService.getLanguage() === 'es' ? 'Switch to English' : 'Cambiar a Español'"
+              title="{{ languageService.getLanguage() === 'es' ? 'English' : 'Español' }}">
+              <span class="text-sm font-medium">{{ languageService.getLanguage() === 'es' ? 'ES' : 'EN' }}</span>
+            </button>
+            
+            <!-- Toggle Tema -->
+            <button 
+              (click)="toggleTheme()"
+              class="p-2 rounded-md text-stone-600 hover:text-caramel hover:bg-stone-50 transition duration-150 ease-in-out focus:outline-none"
+              [attr.aria-label]="themeService.getTheme() === 'light' ? 'Switch to dark theme' : 'Cambiar a tema claro'"
+              [title]="themeService.getTheme() === 'light' ? 'Dark Mode' : 'Light Mode'">
+              <i *ngIf="themeService.getTheme() === 'light'" class="bi bi-moon-fill"></i>
+              <i *ngIf="themeService.getTheme() === 'dark'" class="bi bi-sun-fill"></i>
+            </button>
+          </div>
 
-        <!-- Navegación de Escritorio -->
-        <nav class="hidden sm:block">
-          <ul class="flex space-x-6" role="menubar">
-            <li role="none">
-              <a routerLink="/home" role="menuitem"
-                [class]="isActiveRoute('/home') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
-                inicio
-              </a>
-            </li>
-            <li role="none">
-              <a routerLink="/carta" role="menuitem"
-                [class]="isActiveRoute('/carta') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
-                carta
-              </a>
-            </li>
-            <li role="none">
-              <a routerLink="/galeria" role="menuitem"
-                [class]="isActiveRoute('/galeria') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
-                galería
-              </a>
-            </li>
-            <li role="none">
-              <a routerLink="/contacto" role="menuitem"
-                [class]="isActiveRoute('/contacto') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
-                reservas
-              </a>
-            </li>
-          </ul>
-        </nav>
+          <!-- Botón de Menú Móvil (Hamburguesa) -->
+          <button 
+            (click)="toggleMenu()"
+            class="sm:hidden p-2 rounded-md text-stone-600 hover:text-caramel hover:bg-stone-50 transition duration-150 ease-in-out focus:outline-none"
+            [attr.aria-expanded]="isMenuOpen" 
+            aria-controls="mobile-menu" 
+            aria-label="Abrir menú principal">
+            <!-- Icono de Hamburguesa (Abre) -->
+            <svg *ngIf="!isMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <!-- Icono de Cerrar (Cierra) -->
+            <svg *ngIf="isMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <!-- Navegación de Escritorio -->
+          <nav class="hidden sm:block">
+            <ul class="flex space-x-6" role="menubar">
+              <li role="none">
+                <a routerLink="/home" role="menuitem"
+                  [class]="isActiveRoute('/home') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
+                  {{ translate('nav.home') }}
+                </a>
+              </li>
+              <li role="none">
+                <a routerLink="/carta" role="menuitem"
+                  [class]="isActiveRoute('/carta') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
+                  {{ translate('nav.carta') }}
+                </a>
+              </li>
+              <li role="none">
+                <a routerLink="/galeria" role="menuitem"
+                  [class]="isActiveRoute('/galeria') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
+                  {{ translate('nav.galeria') }}
+                </a>
+              </li>
+              <li role="none">
+                <a routerLink="/contacto" role="menuitem"
+                  [class]="isActiveRoute('/contacto') ? 'text-caramel bg-stone-50 px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:outline-none' : 'text-stone-800 hover:text-caramel px-3 py-2 rounded-md font-medium transition duration-150 ease-in-out focus:bg-stone-50 focus:outline-none'">
+                  {{ translate('nav.reservas') }}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
 
@@ -69,33 +94,48 @@
       role="navigation"
       aria-label="Menú principal móvil"
       [class.hidden]="!isMenuOpen">
+      <!-- Controles móviles de Idioma y Tema -->
+      <div class="flex items-center justify-center gap-4 px-4 py-3 border-b border-gray-100">
+        <button 
+          (click)="toggleLanguage()"
+          class="flex items-center gap-2 px-3 py-2 rounded-md text-stone-600 hover:text-caramel hover:bg-stone-50 transition duration-150 ease-in-out focus:outline-none">
+          <i class="bi bi-translate"></i>
+          <span class="text-sm font-medium">{{ languageService.getLanguage() === 'es' ? 'ES' : 'EN' }}</span>
+        </button>
+        <button 
+          (click)="toggleTheme()"
+          class="flex items-center gap-2 px-3 py-2 rounded-md text-stone-600 hover:text-caramel hover:bg-stone-50 transition duration-150 ease-in-out focus:outline-none">
+          <i *ngIf="themeService.getTheme() === 'light'" class="bi bi-moon-fill"></i>
+          <i *ngIf="themeService.getTheme() === 'dark'" class="bi bi-sun-fill"></i>
+        </button>
+      </div>
       <ul class="px-2 pt-2 pb-3 space-y-1" role="menu">
         <li role="none">
           <a routerLink="/home" role="menuitem"
             [class]="isActiveRoute('/home') ? 'block px-3 py-2 rounded-md text-base font-medium text-caramel bg-stone-100 focus:outline-none' : 'block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-caramel focus:outline-none'"
             (click)="closeMenu()">
-            inicio
+            {{ translate('nav.home') }}
           </a>
         </li>
         <li role="none">
           <a routerLink="/carta" role="menuitem"
             [class]="isActiveRoute('/carta') ? 'block px-3 py-2 rounded-md text-base font-medium text-caramel bg-stone-100 focus:outline-none' : 'block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-caramel focus:outline-none'"
             (click)="closeMenu()">
-            carta
+            {{ translate('nav.carta') }}
           </a>
         </li>
         <li role="none">
           <a routerLink="/galeria" role="menuitem"
             [class]="isActiveRoute('/galeria') ? 'block px-3 py-2 rounded-md text-base font-medium text-caramel bg-stone-100 focus:outline-none' : 'block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-caramel focus:outline-none'"
             (click)="closeMenu()">
-            galería
+            {{ translate('nav.galeria') }}
           </a>
         </li>
         <li role="none">
           <a routerLink="/contacto" role="menuitem"
             [class]="isActiveRoute('/contacto') ? 'block px-3 py-2 rounded-md text-base font-medium text-caramel bg-stone-100 focus:outline-none' : 'block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-caramel focus:outline-none'"
             (click)="closeMenu()">
-            reservas
+            {{ translate('nav.reservas') }}
           </a>
         </li>
       </ul>
@@ -113,7 +153,7 @@
       <div class="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
         <!-- Información de Contacto (ASIDE) -->
         <aside class="mb-4 sm:mb-0">
-          <p class="text-sm text-stone-400">&copy; 2025 BOCATO.</p>
+          <p class="text-sm text-stone-400">{{ translate('footer.copyright') }}</p>
         </aside>
         <!-- Redes Sociales -->
         <nav aria-label="Redes sociales">

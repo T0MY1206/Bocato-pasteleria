@@ -4,7 +4,7 @@
     <!-- Título -->
     <header class="text-center mb-12">
       <h2 id="gallery-heading" class="text-4xl sm:text-5xl font-bold text-stone-900">
-        nuestras últimas creaciones
+        {{ translate('galeria.title') }}
       </h2>
     </header>
 
@@ -18,11 +18,11 @@
             <div class="carousel-image-container">
               <img 
                 [src]="producto.imagen" 
-                [alt]="producto.nombre"
+                [alt]="translate(producto.nombreKey)"
                 class="carousel-image">
             </div>
             <div class="carousel-content">
-              <h3 class="carousel-title">{{ producto.nombre }}</h3>
+              <h3 class="carousel-title">{{ translate(producto.nombreKey) }}</h3>
             </div>
           </article>
         </div>
@@ -35,7 +35,7 @@
           [class.active]="currentIndex === i"
           (click)="goToSlide(i)"
           class="carousel-indicator"
-          [attr.aria-label]="'Ir a ' + producto.nombre">
+          [attr.aria-label]="translate('galeria.goTo') + ' ' + translate(producto.nombreKey)">
         </button>
       </div>
     </div>
@@ -58,7 +58,7 @@
       <img [src]="zoomedImageUrl" [alt]="zoomedImageAlt" class="zoomed-image">
       <div class="zoom-info">
         <h3>{{ zoomedImageAlt }}</h3>
-        <p>Haz clic fuera de la imagen para cerrar</p>
+        <p>{{ translate('galeria.clickToClose') }}</p>
       </div>
     </div>
   </div>

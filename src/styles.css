@@ -2,13 +2,48 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css');
 
+/* ===== VARIABLES CSS PARA TEMA CLARO ===== */
+:root {
+    --bg-primary: #fcfcfc;
+    --bg-secondary: #f5f5f5;
+    --bg-tertiary: #ffffff;
+    --text-primary: #3e2723;
+    --text-secondary: #5d4037;
+    --text-tertiary: #6d4c41;
+    --caramel: #a0522d;
+    --caramel-dark: #8b4513;
+    --caramel-light: #cd853f;
+    --border-color: #e0e0e0;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== VARIABLES CSS PARA TEMA OSCURO (PASTELERÍA) ===== */
+[data-theme="dark"] {
+    --bg-primary: #1a1614;
+    --bg-secondary: #2a2420;
+    --bg-tertiary: #3a2f28;
+    --text-primary: #f5e6d3;
+    --text-secondary: #e8d5c4;
+    --text-tertiary: #d4c4b0;
+    --caramel: #d2691e;
+    --caramel-dark: #cd853f;
+    --caramel-light: #daa520;
+    --border-color: #4a3f35;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --shadow-hover: rgba(0, 0, 0, 0.6);
+    --glass-bg: rgba(58, 47, 40, 0.3);
+    --glass-border: rgba(210, 105, 30, 0.2);
+}
+
 body {
     /* Usamos Inter para el texto normal, Playfair Display para títulos elegantes */
     font-family: 'Inter', sans-serif;
-    background-color: #fcfcfc;
-    /* Fondo casi blanco/crema */
-    color: #3e2723;
-    /* Texto principal (Marrón Oscuro / Chocolate) */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -18,27 +53,27 @@ h2 {
 
 /* Color de acento (Caramelo/Dorado) */
 .text-caramel {
-    color: #a0522d;
+    color: var(--caramel);
 }
 
 .bg-caramel {
-    background-color: #a0522d;
+    background-color: var(--caramel);
 }
 
 .hover\:bg-caramel-dark:hover {
-    background-color: #8b4513;
+    background-color: var(--caramel-dark);
 }
 
 .focus\:ring-caramel {
-    --tw-ring-color: #a0522d;
+    --tw-ring-color: var(--caramel);
 }
 
 .border-caramel {
-    border-color: #a0522d;
+    border-color: var(--caramel);
 }
 
 .hover\:border-caramel:hover {
-    border-color: #a0522d;
+    border-color: var(--caramel);
 }
 
 /* Estilos personalizados para focus visible y accesibilidad */
@@ -46,52 +81,139 @@ button:focus,
 a:focus,
 input:focus,
 textarea:focus {
-    outline: 2px solid #a0522d;
+    outline: 2px solid var(--caramel);
     /* Caramelo brillante para enfoque */
     outline-offset: 2px;
 }
 
 /* Botón caramelo personalizado para Bootstrap */
 .btn-caramel {
-    background-color: #a0522d;
-    border-color: #a0522d;
+    background-color: var(--caramel);
+    border-color: var(--caramel);
     color: white;
+    transition: all 0.3s ease;
 }
 
 .btn-caramel:hover {
-    background-color: #8b4513;
-    border-color: #8b4513;
+    background-color: var(--caramel-dark);
+    border-color: var(--caramel-dark);
     color: white;
 }
 
 .btn-caramel:focus {
-    background-color: #8b4513;
-    border-color: #8b4513;
+    background-color: var(--caramel-dark);
+    border-color: var(--caramel-dark);
     color: white;
     box-shadow: 0 0 0 0.25rem rgba(160, 82, 45, 0.25);
 }
 
 .btn-caramel:active {
-    background-color: #8b4513;
-    border-color: #8b4513;
+    background-color: var(--caramel-dark);
+    border-color: var(--caramel-dark);
     color: white;
 }
 
+/* Botón de submit del formulario de contacto - más fino */
+.submit-reservation-btn {
+    padding: 0.625rem 1.5rem !important;
+    font-size: 0.9375rem !important;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.submit-reservation-btn i {
+    font-size: 0.9375rem;
+}
+
 /* Personalización de formularios Bootstrap */
+.form-control {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
 .form-control:focus {
-    border-color: #a0522d;
+    background-color: var(--bg-tertiary);
+    border-color: var(--caramel);
+    color: var(--text-primary);
     box-shadow: 0 0 0 0.25rem rgba(160, 82, 45, 0.25);
+}
+
+.form-control::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Estilos para form-select (dropdowns) */
+.form-select {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    background-color: var(--bg-tertiary);
+    border-color: var(--caramel);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0.25rem rgba(160, 82, 45, 0.25);
+}
+
+/* Estilos para input-group-text (prefijos de moneda, etc.) */
+.input-group-text {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 /* Personalización de cards */
 .card {
     border-radius: 1rem;
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.card-header {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.card-body {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Asegurar que todos los títulos dentro de cards sean visibles en dark mode */
+[data-theme="dark"] .card-body h3,
+[data-theme="dark"] .card-body h4,
+[data-theme="dark"] .card-body h5,
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .card h4,
+[data-theme="dark"] .card h5 {
+    color: var(--text-primary) !important;
+}
+
+/* Asegurar que todos los títulos dentro de cards sean visibles */
+[data-theme="dark"] .card-body h3,
+[data-theme="dark"] .card-body h4,
+[data-theme="dark"] .card-body h5,
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .card h4,
+[data-theme="dark"] .card h5 {
+    color: var(--text-primary) !important;
 }
 
 /* Personalización de alertas */
 .alert {
     border-radius: 0.75rem;
     border: none;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 /* ===== ANIMACIONES AVANZADAS ===== */
@@ -166,18 +288,19 @@ textarea:focus {
 
 /* ===== EFECTOS DE GLASSMORPHISM ===== */
 .glassmorphism-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px var(--shadow);
+    transition: all 0.3s ease;
 }
 
 .glassmorphism-card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(160, 82, 45, 0.3);
+    background: var(--glass-bg);
+    border-color: var(--caramel);
     transform: translateY(-2px);
-    transition: all 0.3s ease;
+    box-shadow: 0 12px 40px var(--shadow-hover);
 }
 
 /* ===== PARTÍCULAS FLOTANTES ===== */
@@ -193,9 +316,14 @@ textarea:focus {
 
 .particle {
     position: absolute;
-    background: radial-gradient(circle, rgba(160, 82, 45, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--caramel) 0%, transparent 70%);
+    opacity: 0.3;
     border-radius: 50%;
     pointer-events: none;
+}
+
+[data-theme="dark"] .particle {
+    opacity: 0.2;
 }
 
 @keyframes float {
@@ -218,6 +346,20 @@ textarea:focus {
     position: relative;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Botón del home - tamaño proporcional a los títulos reducidos */
+    padding: 0.875rem 2.25rem !important;
+    font-size: 1.125rem !important;
+    line-height: 1.5;
+    min-height: auto;
+    font-weight: 600;
+    gap: 0.625rem;
+}
+
+/* Ajuste del icono del botón del home */
+.cta-button svg {
+    width: 1.375rem !important;
+    height: 1.375rem !important;
+    flex-shrink: 0;
 }
 
 .cta-button::before {
@@ -237,7 +379,7 @@ textarea:focus {
 
 .cta-button:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(160, 82, 45, 0.3);
+    box-shadow: 0 12px 24px rgba(160, 82, 45, 0.3);
 }
 
 .cta-button:active {
@@ -246,7 +388,7 @@ textarea:focus {
 
 /* ===== GRADIENTES DINÁMICOS ===== */
 .dynamic-gradient {
-    background: linear-gradient(135deg, #a0522d, #d2691e, #cd853f);
+    background: linear-gradient(135deg, var(--caramel), var(--caramel-light), var(--caramel-dark));
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
 }
@@ -276,7 +418,7 @@ textarea:focus {
     width: 40px;
     height: 40px;
     border: 3px solid rgba(160, 82, 45, 0.2);
-    border-top: 3px solid #a0522d;
+    border-top: 3px solid var(--caramel);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -285,7 +427,7 @@ textarea:focus {
     width: 20px;
     height: 20px;
     border: 2px solid rgba(160, 82, 45, 0.3);
-    border-top: 2px solid #a0522d;
+    border-top: 2px solid var(--caramel);
     border-radius: 50%;
     animation: spin 0.8s linear infinite reverse;
     margin: 6px auto;
@@ -298,7 +440,7 @@ textarea:focus {
 
 .spinner-text {
     margin-top: 1rem;
-    color: #a0522d;
+    color: var(--caramel);
     font-weight: 500;
     animation: pulse 2s ease-in-out infinite;
 }
@@ -323,7 +465,7 @@ textarea:focus {
 }
 
 .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(160, 82, 45, 0.4);
+    box-shadow: 0 0 20px var(--caramel);
 }
 
 /* ===== RESPONSIVE ANIMATIONS ===== */
@@ -360,8 +502,12 @@ textarea:focus {
 
 /* Gradiente dinámico de fondo */
 .dynamic-gradient-bg {
-  background: linear-gradient(135deg, #f8f9fa 0%, #fef3c7 50%, #fed7aa 100%);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
   background-attachment: fixed;
+}
+
+[data-theme="dark"] .dynamic-gradient-bg {
+  background: linear-gradient(135deg, #1a1614 0%, #2a2420 50%, #3a2f28 100%);
 }
 
 /* Productos destacados */
@@ -411,9 +557,14 @@ textarea:focus {
 
 .particle-advanced {
   position: absolute;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--caramel) 0%, transparent 70%);
+  opacity: 0.3;
   border-radius: 50%;
   animation: floatAdvanced 8s ease-in-out infinite;
+}
+
+[data-theme="dark"] .particle-advanced {
+  opacity: 0.2;
 }
 
 .particle-advanced-1 {
@@ -477,19 +628,20 @@ textarea:focus {
 
 /* Glassmorphism avanzado */
 .glassmorphism-advanced {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--glass-border);
   border-radius: 2rem;
   padding: 2rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px var(--shadow);
   transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .glassmorphism-advanced:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--glass-bg);
+  border-color: var(--caramel);
   transform: translateY(-10px);
-  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 35px 60px -12px var(--shadow-hover);
 }
 
 .experience-card {
@@ -499,6 +651,323 @@ textarea:focus {
 
 .experience-card:hover {
   transform: translateY(-15px) scale(1.02);
+}
+
+/* ===== ESTILOS ADICIONALES PARA DARK THEME ===== */
+[data-theme="dark"] header {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .bg-stone-50 {
+  background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-tertiary) !important;
+}
+
+[data-theme="dark"] .text-stone-900 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-stone-800 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-stone-700 {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-stone-600 {
+  color: var(--text-tertiary) !important;
+}
+
+[data-theme="dark"] .bg-stone-900 {
+  background-color: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .text-white {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .border-gray-100 {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .nav-link.active {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--caramel) !important;
+}
+
+[data-theme="dark"] .nav-tabs {
+  border-color: var(--border-color) !important;
+}
+
+/* ===== AJUSTES PARA CARDS DE PATISSERIE EN DARK MODE ===== */
+[data-theme="dark"] .bg-gradient-to-br.from-amber-50,
+[data-theme="dark"] .bg-gradient-to-br.from-rose-50,
+[data-theme="dark"] .bg-gradient-to-br.from-green-50,
+[data-theme="dark"] .bg-gradient-to-br.from-purple-50,
+[data-theme="dark"] .bg-gradient-to-br.from-amber-100 {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .bg-gradient-to-br.from-amber-50 .font-semibold.text-stone-800,
+[data-theme="dark"] .bg-gradient-to-br.from-rose-50 .font-semibold.text-stone-800,
+[data-theme="dark"] .bg-gradient-to-br.from-green-50 .font-semibold.text-stone-800,
+[data-theme="dark"] .bg-gradient-to-br.from-purple-50 .font-semibold.text-stone-800,
+[data-theme="dark"] .bg-gradient-to-br.from-amber-100 .font-semibold.text-stone-800 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .bg-gradient-to-br.from-amber-50 .text-stone-600,
+[data-theme="dark"] .bg-gradient-to-br.from-rose-50 .text-stone-600,
+[data-theme="dark"] .bg-gradient-to-br.from-green-50 .text-stone-600,
+[data-theme="dark"] .bg-gradient-to-br.from-purple-50 .text-stone-600,
+[data-theme="dark"] .bg-gradient-to-br.from-amber-100 .text-stone-600 {
+  color: var(--text-secondary) !important;
+}
+
+/* Ajustes específicos para cards con gradientes en dark mode */
+[data-theme="dark"] [class*="from-amber-50"],
+[data-theme="dark"] [class*="from-rose-50"],
+[data-theme="dark"] [class*="from-green-50"],
+[data-theme="dark"] [class*="from-purple-50"],
+[data-theme="dark"] [class*="from-amber-100"],
+[data-theme="dark"] [class*="to-orange-50"],
+[data-theme="dark"] [class*="to-pink-50"],
+[data-theme="dark"] [class*="to-emerald-50"],
+[data-theme="dark"] [class*="to-violet-50"],
+[data-theme="dark"] [class*="to-orange-100"] {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Asegurar que los títulos dentro de cards con gradientes sean visibles en dark mode */
+[data-theme="dark"] .bg-gradient-to-br h5,
+[data-theme="dark"] .bg-gradient-to-r h5 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .bg-gradient-to-br p,
+[data-theme="dark"] .bg-gradient-to-r p {
+  color: var(--text-secondary) !important;
+}
+
+/* Ajustes para títulos de secciones en dark mode */
+[data-theme="dark"] h4.text-stone-800,
+[data-theme="dark"] h3.text-stone-800,
+[data-theme="dark"] h5.text-stone-800,
+[data-theme="dark"] h2.text-stone-900,
+[data-theme="dark"] h1.text-stone-900,
+[data-theme="dark"] .text-stone-900 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-stone-700,
+[data-theme="dark"] .text-stone-600 {
+  color: var(--text-secondary) !important;
+}
+
+/* Asegurar que todos los títulos principales sean visibles en dark mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5 {
+  color: var(--text-primary) !important;
+}
+
+/* Títulos con color caramelo también deben ser visibles en dark mode */
+[data-theme="dark"] .text-caramel {
+  color: var(--caramel) !important;
+}
+
+/* Mejorar visibilidad de títulos en secciones específicas */
+[data-theme="dark"] .hero-section h1,
+[data-theme="dark"] .hero-section h2 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] section h2,
+[data-theme="dark"] section h3,
+[data-theme="dark"] section h4 {
+  color: var(--text-primary) !important;
+}
+
+/* Asegurar visibilidad de todos los títulos en dark mode - regla general */
+[data-theme="dark"] header h2,
+[data-theme="dark"] header h3,
+[data-theme="dark"] .text-center h2,
+[data-theme="dark"] .text-center h3 {
+  color: var(--text-primary) !important;
+}
+
+/* Títulos en cards y contenedores */
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .card h4,
+[data-theme="dark"] .card h5,
+[data-theme="dark"] .card-body h3,
+[data-theme="dark"] .card-body h4,
+[data-theme="dark"] .card-body h5 {
+  color: var(--text-primary) !important;
+}
+
+/* ===== CARDS DE PATISSERIE EN DARK MODE ===== */
+[data-theme="dark"] .signature-card {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .signature-card-title {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .signature-card .text-stone-600,
+[data-theme="dark"] .signature-card .text-stone-800 {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .signature-card p {
+  color: var(--text-secondary) !important;
+}
+
+/* Ajustes adicionales para mejorar visibilidad en dark mode */
+[data-theme="dark"] .signature-card .text-caramel {
+  color: var(--caramel) !important;
+}
+
+/* Asegurar que los títulos dentro de las cards de patisserie sean visibles */
+[data-theme="dark"] .signature-card h5,
+[data-theme="dark"] .signature-card .font-semibold {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+/* Mejorar contraste de textos en cards con gradientes en dark mode */
+[data-theme="dark"] [class*="bg-gradient"] h5,
+[data-theme="dark"] [class*="bg-gradient"] .font-semibold,
+[data-theme="dark"] [class*="bg-gradient"] .font-bold {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] [class*="bg-gradient"] p,
+[data-theme="dark"] [class*="bg-gradient"] .text-sm {
+  color: var(--text-secondary) !important;
+}
+
+/* Ajustes específicos para títulos en la sección de temporada */
+[data-theme="dark"] .bg-gradient-to-r h5,
+[data-theme="dark"] .bg-gradient-to-r .font-semibold {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .bg-gradient-to-r p {
+  color: var(--text-secondary) !important;
+}
+
+/* Ajustes adicionales para mejorar visibilidad de títulos en todas las secciones */
+[data-theme="dark"] .text-lg.font-semibold,
+[data-theme="dark"] .text-xl.font-semibold,
+[data-theme="dark"] .text-2xl.font-semibold,
+[data-theme="dark"] .text-3xl.font-bold,
+[data-theme="dark"] .text-4xl.font-bold,
+[data-theme="dark"] .text-5xl.font-bold {
+  color: var(--text-primary) !important;
+}
+
+/* Asegurar que los títulos con clases específicas de Tailwind sean visibles */
+[data-theme="dark"] [class*="text-stone-800"],
+[data-theme="dark"] [class*="text-stone-900"] {
+  color: var(--text-primary) !important;
+}
+
+/* Mejorar contraste en elementos con flex */
+[data-theme="dark"] .flex.items-center h4,
+[data-theme="dark"] .flex.items-center h5 {
+  color: var(--text-primary) !important;
+}
+
+/* ===== FORMULARIOS EN DARK MODE ===== */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .input-group-text {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--caramel) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 0 0.25rem rgba(210, 105, 30, 0.25) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+[data-theme="dark"] .form-select option {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Asegurar que input-group mantenga consistencia en dark mode */
+[data-theme="dark"] .input-group .form-control,
+[data-theme="dark"] .input-group .input-group-text {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ===== GALERÍA EN DARK MODE ===== */
+[data-theme="dark"] .carousel-card {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .carousel-content {
+  background: var(--bg-tertiary) !important;
+}
+
+[data-theme="dark"] .carousel-title {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .gallery-card:hover .gallery-content {
+  background: var(--bg-tertiary) !important;
+}
+
+/* Ajustes adicionales para mejorar visibilidad en dark mode */
+[data-theme="dark"] .signature-card .text-caramel {
+  color: var(--caramel) !important;
+}
+
+/* Asegurar que los títulos dentro de las cards de patisserie sean visibles */
+[data-theme="dark"] .signature-card h5,
+[data-theme="dark"] .signature-card .font-semibold {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+/* Mejorar contraste de textos en cards con gradientes en dark mode */
+[data-theme="dark"] [class*="bg-gradient"] h5,
+[data-theme="dark"] [class*="bg-gradient"] .font-semibold,
+[data-theme="dark"] [class*="bg-gradient"] .font-bold {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] [class*="bg-gradient"] p,
+[data-theme="dark"] [class*="bg-gradient"] .text-sm {
+  color: var(--text-secondary) !important;
 }
 
 /* Responsive para nuevas secciones */

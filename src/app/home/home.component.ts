@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild, effect } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AnimationsService } from '../services/animations.service';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,28 @@ import { AnimationsService } from '../services/animations.service';
   imports: [RouterModule],
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('heroSection', { static: false }) heroSection!: ElementRef;
+  private typingTimer: any = null;
 
-  constructor(private animationsService: AnimationsService) {}
+  constructor(
+    private animationsService: AnimationsService,
+    public languageService: LanguageService
+  ) {
+    // Reaccionar a cambios de idioma
+    effect(() => {
+      const lang = this.languageService.currentLanguageSignal();
+      // Re-ejecutar el efecto de typing cuando cambia el idioma
+      // Esperar un poco más para asegurar que el cambio de idioma se haya aplicado
+      setTimeout(() => {
+        this.setupTypingEffect();
+      }, 150);
+    });
+  }
+
+  translate(key: string): string {
+    return this.languageService.translate(key);
+  }
 
   ngOnInit(): void {
     // Inicializar animaciones cuando el componente se carga
@@ -20,8 +39,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.initializeAnimations();
     this.setupParallaxEffects();
-    this.setupTypingEffect();
+    // Esperar un poco para asegurar que el servicio de traducción esté listo
+    // Usar un delay más largo para asegurar que todo esté inicializado
+    setTimeout(() => {
+      this.setupTypingEffect();
+    }, 300);
     this.setupFloatingParticles();
+  }
+
+  ngOnDestroy(): void {
+    // Limpiar el timer cuando el componente se destruye
+    if (this.typingTimer) {
+      clearInterval(this.typingTimer);
+      this.typingTimer = null;
+    }
   }
 
   private initializeAnimations(): void {
@@ -63,10 +94,57 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private setupTypingEffect(): void {
     const typingElement = document.querySelector('.typing-text');
     if (typingElement) {
-      const text = 'la dulce tentación';
+      // Limpiar cualquier timer previo
+      if (this.typingTimer) {
+        clearInterval(this.typingTimer);
+        this.typingTimer = null;
+      }
+      
+      // Asegurarse de que el elemento esté completamente vacío
       typingElement.textContent = '';
-      this.animationsService.typeWriter(typingElement as HTMLElement, text, 100);
+      
+      // Obtener el texto traducido
+      const text = this.translate('home.subtitle');
+      
+      // Verificar que el texto sea válido antes de iniciar el typing
+      if (text && text !== 'home.subtitle' && text.length > 0) {
+        // Esperar un frame para asegurar que el DOM esté listo
+        requestAnimationFrame(() => {
+          // Limpiar nuevamente por si acaso
+          typingElement.textContent = '';
+          
+          // Iniciar el typing effect con control del timer
+          this.startTypingEffect(typingElement as HTMLElement, text);
+        });
+      } else {
+        // Si la traducción no está lista, intentar de nuevo en un momento
+        setTimeout(() => {
+          this.setupTypingEffect();
+        }, 100);
+      }
     }
+  }
+
+  private startTypingEffect(element: HTMLElement, text: string): void {
+    // Limpiar cualquier timer previo
+    if (this.typingTimer) {
+      clearInterval(this.typingTimer);
+    }
+    
+    let i = 0;
+    element.textContent = '';
+    
+    this.typingTimer = setInterval(() => {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+      } else {
+        if (this.typingTimer) {
+          clearInterval(this.typingTimer);
+          this.typingTimer = null;
+        }
+      }
+    }, 100);
   }
 
   private setupFloatingParticles(): void {

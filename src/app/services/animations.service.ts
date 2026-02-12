@@ -98,9 +98,15 @@ export class AnimationsService {
 
   // Animación de typing effect
   typeWriter(element: HTMLElement, text: string, speed: number = 50): void {
-    let i = 0;
+    // Limpiar cualquier contenido previo
     element.textContent = '';
     
+    // Verificar que el texto sea válido
+    if (!text || text.length === 0) {
+      return;
+    }
+    
+    let i = 0;
     const timer = setInterval(() => {
       if (i < text.length) {
         element.textContent += text.charAt(i);
